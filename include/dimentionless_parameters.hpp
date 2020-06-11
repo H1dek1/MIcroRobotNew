@@ -9,6 +9,14 @@
 
 namespace MicroRobot
 {
+
+const int    NUM_CYCLES = 2;
+const double DT = 1.0e-4;
+const double OUT_TIME = 1.0e-2;
+const double OMEGA = 2.0 * M_PI;
+const int    MAX_ITER = int(NUM_CYCLES / DT);
+const int    OUT_ITER = int(OUT_TIME / DT);
+const int    SLEEP_ITER = int(1.0 / DT);
  
 const double ALPHA = 1.0e+2;
 const double BETA  = 1.0e-2;

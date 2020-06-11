@@ -19,6 +19,7 @@ class Environment{
 
   public:
     void run();
+    void output() const;
 };
 
 }

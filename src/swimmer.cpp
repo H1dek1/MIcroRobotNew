@@ -8,6 +8,7 @@ namespace MicroRobot
 
 Swimmer::Swimmer()
 {
+  std::cout << "swimmer constructed!" << std::endl;
 }
 
 void Swimmer::reset()
@@ -36,6 +37,10 @@ void Swimmer::reset()
   std::cout << perm[1].getPos().x << " " << perm[1].getPos().y << std::endl;;
   std::cout << para.getPos().x << " " << para.getPos().y << std::endl;;
   
+}
+
+void Swimmer::update(Vector2D ext_field)
+{
 }
 
 

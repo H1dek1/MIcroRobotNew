@@ -14,6 +14,10 @@ class ExternalMagneticField{
     ExternalMagneticField();
     ~ExternalMagneticField();
     void reset();
+
+  public:
+    void update(double time);
+    Vector2D moment() const;
 };
 
 }

@@ -20,6 +20,9 @@ class Swimmer{
     Swimmer();
     ~Swimmer();
     void reset();
+
+  public:
+    void update(Vector2D ext_field);
 };
 
 }
