@@ -6,9 +6,13 @@
 #include <vector>
 #include <array>
 #include <fstream>
+#include <string>
+#include <tuple>
 
 namespace MicroRobot
 {
+
+const std::string FILENAME = "../result/result.txt";
 
 const int    NUM_CYCLES = 2;
 const double DT = 1.0e-4;

@@ -16,9 +16,14 @@ void PermanentParticle::reset(Vector2D init_pos, double init_angle)
   m_moment.setPolar(1.0, init_angle+(M_PI/2));
 }
 
-Vector2D PermanentParticle::getPos() const
+Vector2D PermanentParticle::pos() const
 {
   return m_pos;
+}
+
+Vector2D PermanentParticle::moment() const
+{
+  return m_moment;
 }
 
 PermanentParticle::~PermanentParticle()

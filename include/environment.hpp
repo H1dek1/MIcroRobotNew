@@ -19,7 +19,10 @@ class Environment{
 
   public:
     void run();
-    void output() const;
+    void output();
+
+  private:
+    std::ofstream fout;
 };
 
 }

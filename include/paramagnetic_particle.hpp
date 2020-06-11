@@ -19,7 +19,9 @@ class ParamagneticParticle{
     void reset(Vector2D init_pos);
 
   public:
-    Vector2D getPos() const;
+    Vector2D pos() const;
+    Vector2D moment() const;
+    void calcMoment(Vector2D external_field);
 };
 
 }

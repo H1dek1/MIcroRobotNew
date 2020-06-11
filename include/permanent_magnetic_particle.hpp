@@ -19,7 +19,8 @@ class PermanentParticle{
     void reset(Vector2D init_pos, double init_angle);
 
   public:
-    Vector2D getPos() const;
+    Vector2D pos() const;
+    Vector2D moment() const;
 };
 
 }

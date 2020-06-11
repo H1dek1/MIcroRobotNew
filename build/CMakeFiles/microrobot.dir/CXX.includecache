@@ -17,6 +17,10 @@ array
 -
 fstream
 -
+string
+-
+tuple
+-
 
 /home/hideki/Documents/MicroRobotNew/include/environment.hpp
 swimmer.hpp
@@ -59,4 +63,20 @@ cmath
 /home/hideki/Documents/MicroRobotNew/src/environment.cpp
 environment.hpp
 /home/hideki/Documents/MicroRobotNew/src/environment.hpp
+
+/home/hideki/Documents/MicroRobotNew/src/external_magnetic_field.cpp
+external_magnetic_field.hpp
+/home/hideki/Documents/MicroRobotNew/src/external_magnetic_field.hpp
+
+/home/hideki/Documents/MicroRobotNew/src/paramagnetic_particle.cpp
+paramagnetic_particle.hpp
+/home/hideki/Documents/MicroRobotNew/src/paramagnetic_particle.hpp
+
+/home/hideki/Documents/MicroRobotNew/src/permanent_magnetic_particle.cpp
+permanent_magnetic_particle.hpp
+/home/hideki/Documents/MicroRobotNew/src/permanent_magnetic_particle.hpp
+
+/home/hideki/Documents/MicroRobotNew/src/swimmer.cpp
+swimmer.hpp
+/home/hideki/Documents/MicroRobotNew/src/swimmer.hpp
 

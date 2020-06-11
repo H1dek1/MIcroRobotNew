@@ -23,6 +23,9 @@ class Swimmer{
 
   public:
     void update(Vector2D ext_field);
+    Vector2D pos() const;
+    double angle() const;
+    std::tuple<double, double, Vector2D> getMoments();
 };
 
 }

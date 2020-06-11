@@ -13,7 +13,6 @@ ExternalMagneticField::ExternalMagneticField()
 void ExternalMagneticField::reset()
 {
   m_moment.setPolar(1.0, FIELD_ANGLE+(M_PI/2));
-  std::cout << m_moment.x << " " << m_moment.y << std::endl;
 }
 
 Vector2D ExternalMagneticField::moment() const

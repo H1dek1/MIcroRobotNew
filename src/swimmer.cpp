@@ -8,7 +8,6 @@ namespace MicroRobot
 
 Swimmer::Swimmer()
 {
-  std::cout << "swimmer constructed!" << std::endl;
 }
 
 void Swimmer::reset()
@@ -32,15 +31,39 @@ void Swimmer::reset()
   perm[0].reset(pos_1, INIT_ANGLE_1);
   perm[1].reset(pos_2, INIT_ANGLE_2);
   para.reset(pos_3);
-
-  std::cout << perm[0].getPos().x << " " << perm[0].getPos().y << std::endl;;
-  std::cout << perm[1].getPos().x << " " << perm[1].getPos().y << std::endl;;
-  std::cout << para.getPos().x << " " << para.getPos().y << std::endl;;
   
 }
 
 void Swimmer::update(Vector2D ext_field)
 {
+  //set paramagnetic moment
+  Vector2D all_field = ext_field;
+  for(int id = 0; id < 2; id++){
+    Vector2D para2perm = perm[id].pos() - para.pos();
+
+    Vector2D dipole_field = para2perm;
+    dipole_field *= 3 * para2perm.dot(perm[id].moment());
+    dipole_field -= perm[id].moment();
+    dipole_field /= ALPHA;
+    all_field += dipole_field;
+  }
+  para.calcMoment( all_field );
+
+}
+
+Vector2D Swimmer::pos() const
+{
+  return m_center_pos;
+}
+
+double Swimmer::angle() const
+{
+  return m_center_angle;
+}
+
+std::tuple<double, double, Vector2D> Swimmer::getMoments()
+{
+  return {perm[0].moment().radians(), perm[1].moment().radians(), para.moment()};
 }
 
 
