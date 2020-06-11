@@ -8,6 +8,7 @@ namespace MicroRobot
 
 Environment::Environment()
 {
+  std::cout << "environment contructed!" << std::endl;
 }
 
 void Environment::run()

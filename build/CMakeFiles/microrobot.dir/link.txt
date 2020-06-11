@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmicrorobot.a  CMakeFiles/microrobot.dir/environment.cpp.o CMakeFiles/microrobot.dir/external_magnetic_field.cpp.o CMakeFiles/microrobot.dir/paramagnetic_particle.cpp.o CMakeFiles/microrobot.dir/permanent_magnetic_particle.cpp.o CMakeFiles/microrobot.dir/swimmer.cpp.o
+/usr/bin/ranlib libmicrorobot.a
