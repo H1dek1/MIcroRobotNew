@@ -19,22 +19,21 @@ def main():
     center_angle = data[:, 4]
     theta_1      = data[:, 5]
     theta_2      = data[:, 6]
-    para_angle   = data[:, 7]
-    para_norm    = data[:, 8]
+
     perm1_x = center_x - 0.5*np.cos(center_angle)
     perm1_y = center_y - 0.5*np.sin(center_angle)
-    perm1_u = -AbyL * np.sin(theta_1)
-    perm1_v =  AbyL * np.cos(theta_1)
+    perm1_u = 2 * AbyL * np.cos(theta_1)
+    perm1_v = 2 * AbyL * np.sin(theta_1)
 
     perm2_x = center_x + 0.5*np.cos(center_angle)
     perm2_y = center_y + 0.5*np.sin(center_angle)
-    perm2_u = -AbyL * np.sin(theta_2)
-    perm2_v =  AbyL * np.cos(theta_2)
+    perm2_u = 2 * AbyL * np.cos(theta_2)
+    perm2_v = 2 * AbyL * np.sin(theta_2)
 
     para_x = center_x - 0.5*np.sqrt(3)*np.sin(center_angle)
     para_y = center_y + 0.5*np.sqrt(3)*np.cos(center_angle)
-    para_u = -para_norm * np.sin(para_angle) / 6 * AbyL
-    para_v =  para_norm * np.cos(para_angle) / 6 * AbyL
+    para_u = data[:, 7] / 10 * (2*AbyL)
+    para_v = data[:, 8] / 10 * (2*AbyL)
     
     fig, axes = plt.subplots(2, 1)
     matplotlibSetting(fig, axes)

@@ -26,6 +26,15 @@ Vector2D PermanentParticle::moment() const
   return m_moment;
 }
 
+double PermanentParticle::calcTorque(Vector2D field)
+{
+  return 0.0;
+}
+
+void PermanentParticle::calcVelocity(double ext_torque)
+{
+}
+
 PermanentParticle::~PermanentParticle()
 {
 }

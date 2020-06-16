@@ -36,6 +36,35 @@ void Swimmer::reset()
 
 void Swimmer::update(Vector2D ext_field)
 {
+  /* Paramagnetic Moment */
+  calcParamagneticMoment( ext_field );
+  /* Rotating permanent particles */
+  rotateParticles( ext_field );
+}
+
+void Swimmer::rotateParticles(Vector2D ext_field)
+{
+  std::vector<Vector2D> field;
+  std::vector<double> torque;
+  field = calcFieldOnParticles( ext_field );
+  for(int id = 0; id < 2; id++)
+    torque[id] = perm[id].calcTorque( field[id] );
+  
+  perm[0].calcVelocity( torque[1] );
+  perm[1].calcVelocity( torque[0] );
+}
+
+std::vector<Vector2D> Swimmer::calcFieldOnParticles(Vector2D ext_field)
+{
+  std::vector<Vector2D> field;
+  field[0] = ext_field;
+  field[1] = ext_field;
+  return field;
+}
+
+
+void Swimmer::calcParamagneticMoment(Vector2D ext_field)
+{
   //set paramagnetic moment
   Vector2D all_field = ext_field;
   for(int id = 0; id < 2; id++){
