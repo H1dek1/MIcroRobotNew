@@ -13,6 +13,7 @@ class PermanentParticle{
     Vector2D m_vel;
     Vector2D m_moment;
     double   m_torque;
+    double   m_omega;
     
   public:
     PermanentParticle();
@@ -23,7 +24,8 @@ class PermanentParticle{
     Vector2D pos() const;
     Vector2D moment() const;
     double calcTorque(Vector2D field);
-    void calcVelocity(double ext_torque);
+    Vector2D rotate(double ext_torque, Vector2D rel_pos);
+    void setPosition(double xx, double yy);
 };
 
 }

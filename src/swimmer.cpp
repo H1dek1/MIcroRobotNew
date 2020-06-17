@@ -39,29 +39,57 @@ void Swimmer::update(Vector2D ext_field)
   /* Paramagnetic Moment */
   calcParamagneticMoment( ext_field );
   /* Rotating permanent particles */
-  rotateParticles( ext_field );
+  calcCenterVelocity( ext_field );
+  /* move all particles */
+  updateParticlesPosition();
 }
 
-void Swimmer::rotateParticles(Vector2D ext_field)
+void Swimmer::calcCenterVelocity(Vector2D ext_field)
 {
-  std::vector<Vector2D> field;
-  std::vector<double> torque;
+  std::array<Vector2D, 2> field;
+  std::array<double, 2> torque;
+  std::array<Vector2D, 2> velocity;
   field = calcFieldOnParticles( ext_field );
-  for(int id = 0; id < 2; id++)
+
+  for(int id = 0; id < 2; id++){
     torque[id] = perm[id].calcTorque( field[id] );
-  
-  perm[0].calcVelocity( torque[1] );
-  perm[1].calcVelocity( torque[0] );
+    velocity[0] = perm[0].rotate(torque[1], perm[1].pos());
+    velocity[1] = perm[1].rotate(torque[0], perm[0].pos());
+  }
+  m_center_vel = (velocity[0] + velocity[1])/2;
+  Vector2D unit;
+  unit.setPolar(1, m_center_angle+(M_PI/2));
+  m_center_angle_vel = (velocity[0] - velocity[1]).dot(unit);
 }
 
-std::vector<Vector2D> Swimmer::calcFieldOnParticles(Vector2D ext_field)
+std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
 {
-  std::vector<Vector2D> field;
-  field[0] = ext_field;
-  field[1] = ext_field;
+  std::array<Vector2D, 2> field;
+  field[0] = (perm[1].pos() - perm[0].pos())*3*perm[1].moment().dot(perm[1].pos() - perm[0].pos()) - perm[1].moment();
+  field[0] += (para.pos() - perm[0].pos())*3*para.moment().dot(para.pos() - perm[0].pos()) - para.moment();
+  field[1] = (perm[0].pos() - perm[1].pos())*3*perm[0].moment().dot(perm[0].pos() - perm[1].pos()) - perm[0].moment();
+  field[1] += (para.pos() - perm[1].pos())*3*para.moment().dot(para.pos() - perm[1].pos()) - para.moment();
   return field;
 }
 
+void Swimmer::updateParticlesPosition()
+{
+  m_center_pos += m_center_vel * DT;
+  m_center_angle += m_center_angle_vel * DT;
+  perm[0].setPosition( 
+      m_center_pos.x - (0.5*cos(m_center_angle)),
+      m_center_pos.y - (0.5*sin(m_center_angle))
+      );
+  perm[1].setPosition( 
+      m_center_pos.x + (0.5*cos(m_center_angle)),
+      m_center_pos.y + (0.5*sin(m_center_angle))
+      );
+
+  para.setPosition(
+      m_center_pos.x - HIGHT*sin(m_center_angle),
+      m_center_pos.y + HIGHT*cos(m_center_angle)
+      );
+}
 
 void Swimmer::calcParamagneticMoment(Vector2D ext_field)
 {

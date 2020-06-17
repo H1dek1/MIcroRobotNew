@@ -19,10 +19,9 @@ void Environment::run()
   field.reset();
 
   for(int iter = 0; iter < MAX_ITER; iter++){
-    if(iter%5000 == 0){
+    if(iter%5000 == 0)
       std::cout << iter << "/" << MAX_ITER << std::endl;
-    }
-
+    
     field.update( iter * DT );
     swimmer.update( field.moment() );
 

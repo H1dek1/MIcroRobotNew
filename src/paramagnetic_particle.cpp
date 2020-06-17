@@ -31,6 +31,12 @@ void ParamagneticParticle::calcMoment(Vector2D external_field)
   m_moment *= GAMMA;
 }
 
+void ParamagneticParticle::setPosition(double xx, double yy)
+{
+  m_pos.x = xx;
+  m_pos.y = yy;
+}
+
 ParamagneticParticle::~ParamagneticParticle()
 {
 }

@@ -14,7 +14,9 @@ class Swimmer{
     ParamagneticParticle para;
 
     Vector2D m_center_pos;
+    Vector2D m_center_vel;
     double m_center_angle;
+    double m_center_angle_vel;
 
   public:
     Swimmer();
@@ -29,8 +31,9 @@ class Swimmer{
 
   private:
     void calcParamagneticMoment(Vector2D ext_field);
-    std::vector<Vector2D> calcFieldOnParticles(Vector2D ext_field);
-    void rotateParticles(Vector2D ext_field);
+    std::array<Vector2D, 2> calcFieldOnParticles(Vector2D ext_field);
+    void calcCenterVelocity(Vector2D ext_field);
+    void updateParticlesPosition();
 };
 
 }
