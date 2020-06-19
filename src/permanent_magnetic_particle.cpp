@@ -36,8 +36,9 @@ Vector2D PermanentParticle::rotate(double ext_torque, Vector2D rel_pos)
 {
   m_omega = BETA*m_torque - (BETA/2)/(L2A*L2A*L2A)*ext_torque;
   m_moment.rotateVector( m_omega*DT );
-  m_vel.x = -BETA*(rel_pos.y - m_pos.y) * m_torque;
-  m_vel.y =  BETA*(rel_pos.x - m_pos.x) * m_torque;
+  std::cout << m_omega << std::endl;
+  //m_vel.x = -BETA*(rel_pos.y - m_pos.y) * m_torque;
+  //m_vel.y =  BETA*(rel_pos.x - m_pos.x) * m_torque;
   return m_vel;
 }
 

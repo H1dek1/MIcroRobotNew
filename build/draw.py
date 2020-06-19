@@ -40,7 +40,7 @@ def main():
     ims = []
     
     for step in tqdm(range(ext_x.size)):
-        im_0 = axes[0].quiver(-2, -0.5, ext_x[step], ext_y[step], color='black', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
+        im_0 = axes[0].quiver(-2, -0.5, ext_x[step], ext_y[step], color='black', angles='xy', scale_units='xy', scale=1, width=5.0e-3)
 
         im_1 = axes[0].quiver(perm1_x[step], perm1_y[step], perm1_u[step], perm1_v[step], color='black', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
         perm1 = patches.Circle(xy=(perm1_x[step], perm1_y[step]), radius=AbyL, fill=False)

@@ -1,4 +1,4 @@
-# Install script for directory: /home/hideki-lab/Documents/MicrorobotNew/src
+# Install script for directory: /home/hideki/Documents/MicroRobotNew/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/hideki-lab/Documents/MicrorobotNew/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/hideki/Documents/MicroRobotNew/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

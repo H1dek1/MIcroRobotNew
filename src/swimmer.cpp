@@ -41,7 +41,7 @@ void Swimmer::update(Vector2D ext_field)
   /* Rotating permanent particles */
   calcCenterVelocity( ext_field );
   /* move all particles */
-  updateParticlesPosition();
+  //updateParticlesPosition();
 }
 
 void Swimmer::calcCenterVelocity(Vector2D ext_field)
@@ -53,9 +53,11 @@ void Swimmer::calcCenterVelocity(Vector2D ext_field)
 
   for(int id = 0; id < 2; id++){
     torque[id] = perm[id].calcTorque( field[id] );
+  }
     velocity[0] = perm[0].rotate(torque[1], perm[1].pos());
     velocity[1] = perm[1].rotate(torque[0], perm[0].pos());
-  }
+    std::cout << "torque[0]=" << torque[0] << std::endl;
+    std::cout << "torque[1]=" << torque[1] << std::endl;
   m_center_vel = (velocity[0] + velocity[1])/2;
   Vector2D unit;
   unit.setPolar(1, m_center_angle+(M_PI/2));
@@ -65,10 +67,16 @@ void Swimmer::calcCenterVelocity(Vector2D ext_field)
 std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
 {
   std::array<Vector2D, 2> field;
+  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
   field[0] = (perm[1].pos() - perm[0].pos())*3*perm[1].moment().dot(perm[1].pos() - perm[0].pos()) - perm[1].moment();
+  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
   field[0] += (para.pos() - perm[0].pos())*3*para.moment().dot(para.pos() - perm[0].pos()) - para.moment();
+  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
   field[1] = (perm[0].pos() - perm[1].pos())*3*perm[0].moment().dot(perm[0].pos() - perm[1].pos()) - perm[0].moment();
+  std::cout << "field[1]=" << field[1].x << " " << field[1].y << std::endl;
   field[1] += (para.pos() - perm[1].pos())*3*para.moment().dot(para.pos() - perm[1].pos()) - para.moment();
+  std::cout << "field[1]=" << field[1].x << " " << field[1].y << std::endl;
+
   return field;
 }
 
@@ -102,7 +110,7 @@ void Swimmer::calcParamagneticMoment(Vector2D ext_field)
     dipole_field *= 3 * para2perm.dot(perm[id].moment());
     dipole_field -= perm[id].moment();
     dipole_field /= ALPHA;
-    all_field += dipole_field;
+    //all_field += dipole_field;
   }
   para.calcMoment( all_field );
 
