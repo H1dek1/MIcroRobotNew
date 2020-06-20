@@ -35,28 +35,28 @@ def main():
     para_u = data[:, 7] / 10 * (2*AbyL)
     para_v = data[:, 8] / 10 * (2*AbyL)
     
-    fig, axes = plt.subplots(2, 1)
+    fig, axes = plt.subplots(1, 2, figsize=(10, 8))
     matplotlibSetting(fig, axes)
     ims = []
     
     for step in tqdm(range(ext_x.size)):
-        im_0 = axes[0].quiver(-2, -0.5, ext_x[step], ext_y[step], color='black', angles='xy', scale_units='xy', scale=1, width=5.0e-3)
+        im_0 = axes[0].quiver(-2, -0.5, ext_x[step], ext_y[step], color='black', angles='xy', scale_units='xy', scale=2, width=5.0e-3)
 
-        im_1 = axes[0].quiver(perm1_x[step], perm1_y[step], perm1_u[step], perm1_v[step], color='black', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
-        perm1 = patches.Circle(xy=(perm1_x[step], perm1_y[step]), radius=AbyL, fill=False)
+        perm1 = patches.Circle(xy=(perm1_x[step], perm1_y[step]), radius=AbyL, fc='gray', ec='gray', fill=False)
         im_1_patch = axes[0].add_patch(perm1)
+        im_1 = axes[0].quiver(perm1_x[step], perm1_y[step], perm1_u[step], perm1_v[step], color='gray', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
 
-        im_2 = axes[0].quiver(perm2_x[step], perm2_y[step], perm2_u[step], perm2_v[step], color='black', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
-        perm2 = patches.Circle(xy=(perm2_x[step], perm2_y[step]), radius=AbyL, fill=False)
+        perm2 = patches.Circle(xy=(perm2_x[step], perm2_y[step]), radius=AbyL, fc='gray', ec='gray', fill=False)
         im_2_patch = axes[0].add_patch(perm2)
+        im_2 = axes[0].quiver(perm2_x[step], perm2_y[step], perm2_u[step], perm2_v[step], color='gray', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
 
-        im_3 = axes[0].quiver(para_x[step], para_y[step], para_u[step], para_v[step], color='black', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
-        para = patches.Circle(xy=(para_x[step], para_y[step]), radius=AbyL, fill=False)
+        para = patches.Circle(xy=(para_x[step], para_y[step]), radius=AbyL, fc='orange', ec='orange', fill=False)
         im_3_patch = axes[0].add_patch(para)
-        ims.append([im_0] \
-                +[im_1]+[im_1_patch] \
-                +[im_2]+[im_2_patch] \
-                +[im_3]+[im_3_patch])
+        im_3 = axes[0].quiver(para_x[step], para_y[step], para_u[step], para_v[step], color='orange', angles='xy', scale_units='xy', scale=1, pivot='mid', width=5.0e-3)
+        ims.append(
+                [im_1_patch]+[im_2_patch]+[im_3_patch] \
+                +[im_0]+[im_1]+[im_2]+[im_3] \
+                )
     
     ani = animation.ArtistAnimation(fig, ims, interval=(DT*5)*1.0e+3)
     print('Saving animation ...')
@@ -66,7 +66,7 @@ def matplotlibSetting(fig, axes):
     axes[0].set_xlabel('$x/l$', fontsize=15)
     axes[0].set_ylabel('$y/l$', fontsize=15)
     axes[0].set_xlim(-3, 3)
-    axes[0].set_ylim(-1, 1.5)
+    axes[0].set_ylim(-1, 4)
     axes[0].set_aspect('equal')
 
 if __name__ == '__main__':

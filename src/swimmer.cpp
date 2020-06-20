@@ -56,8 +56,8 @@ void Swimmer::calcCenterVelocity(Vector2D ext_field)
   }
     velocity[0] = perm[0].rotate(torque[1], perm[1].pos());
     velocity[1] = perm[1].rotate(torque[0], perm[0].pos());
-    std::cout << "torque[0]=" << torque[0] << std::endl;
-    std::cout << "torque[1]=" << torque[1] << std::endl;
+    //std::cout << "torque[0]=" << torque[0] << std::endl;
+    //std::cout << "torque[1]=" << torque[1] << std::endl;
   m_center_vel = (velocity[0] + velocity[1])/2;
   Vector2D unit;
   unit.setPolar(1, m_center_angle+(M_PI/2));
@@ -66,16 +66,37 @@ void Swimmer::calcCenterVelocity(Vector2D ext_field)
 
 std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
 {
+  /* ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   * ???????????????????????
+   */
   std::array<Vector2D, 2> field;
-  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
+  std::array<Vector2D, 2> para_field;
   field[0] = (perm[1].pos() - perm[0].pos())*3*perm[1].moment().dot(perm[1].pos() - perm[0].pos()) - perm[1].moment();
-  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
-  field[0] += (para.pos() - perm[0].pos())*3*para.moment().dot(para.pos() - perm[0].pos()) - para.moment();
-  std::cout << "field[0]=" << field[0].x << " " << field[0].y << std::endl;
+  para_field[0] = (para.pos() - perm[0].pos())*3*para.moment().dot(para.pos() - perm[0].pos()) - para.moment();
   field[1] = (perm[0].pos() - perm[1].pos())*3*perm[0].moment().dot(perm[0].pos() - perm[1].pos()) - perm[0].moment();
-  std::cout << "field[1]=" << field[1].x << " " << field[1].y << std::endl;
-  field[1] += (para.pos() - perm[1].pos())*3*para.moment().dot(para.pos() - perm[1].pos()) - para.moment();
-  std::cout << "field[1]=" << field[1].x << " " << field[1].y << std::endl;
+  para_field[1] = (para.pos() - perm[1].pos())*3*para.moment().dot(para.pos() - perm[1].pos()) - para.moment();
+  //std::cout << "para_field[0] = "
+  //  << para_field[0].x << " "
+  //  << para_field[0].y << std::endl;
+  //std::cout << "para_field[1] = "
+  //  << para_field[1].x << " "
+  //  << para_field[1].y << std::endl;
+  field[0] += para_field[0];
+  field[1] += para_field[1];
+  //std::cout << "field[0] = "
+  //  << field[0].x << " "
+  //  << field[0].y << std::endl;
+  //std::cout << "field[1] = "
+  //  << field[1].x << " "
+  //  << field[1].y << std::endl;
 
   return field;
 }
