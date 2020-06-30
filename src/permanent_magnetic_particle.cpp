@@ -29,13 +29,13 @@ Vector2D PermanentParticle::moment() const
 double PermanentParticle::calcTorque(Vector2D field)
 {
   m_torque = (m_moment.x * field.y) - (m_moment.y * field.x);
-  std::cout << m_torque << std::endl;
+  //std::cout << m_torque << std::endl;
   return m_torque;
 }
 
 Vector2D PermanentParticle::rotate(double ext_torque, Vector2D rel_pos)
 {
-  m_omega = BETA*m_torque - (BETA/2)/(L2A*L2A*L2A)*ext_torque;
+  m_omega = (BETA/AbyL3)*m_torque - (BETA/2)*ext_torque;
   m_moment.rotateVector( m_omega*DT );
   m_vel.x = -BETA*(rel_pos.y - m_pos.y) * m_torque;
   m_vel.y =  BETA*(rel_pos.x - m_pos.x) * m_torque;

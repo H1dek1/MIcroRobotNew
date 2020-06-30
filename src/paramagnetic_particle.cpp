@@ -29,6 +29,8 @@ void ParamagneticParticle::calcMoment(Vector2D external_field)
 {
   m_moment = external_field;
   m_moment *= GAMMA;
+  //std::cout << "para Moment" << std::endl;
+  //std::cout << m_moment.degrees() << std::endl;
 }
 
 void ParamagneticParticle::setPosition(double xx, double yy)

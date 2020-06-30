@@ -12,8 +12,11 @@ class PermanentParticle{
     Vector2D m_pos;
     Vector2D m_vel;
     Vector2D m_moment;
-    double   m_torque;
+    //double   m_torque;
     double   m_omega;
+  public:
+    double   m_torque;
+
     
   public:
     PermanentParticle();
