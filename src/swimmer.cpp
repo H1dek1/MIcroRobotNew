@@ -79,12 +79,23 @@ std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
 
   field[0] = ext_field * ALPHA;
   field[1] = ext_field * ALPHA;
+  //std::cout << "field=ext" << std::endl;
+  //std::cout << field[0].x << " " << field[0].y << std::endl;
+  //std::cout << field[1].x << " " << field[1].y << std::endl;
 
   field[0] += dipole_field[0];
   field[1] += dipole_field[1];
 
+  //std::cout << "field=ext+dipole" << std::endl;
+  //std::cout << field[0].x << " " << field[0].y << std::endl;
+  //std::cout << field[1].x << " " << field[1].y << std::endl;
+
   field[0] += para_field[0];
   field[1] += para_field[1];
+
+  //std::cout << "field=ext+dipole+para" << std::endl;
+  //std::cout << field[0].x << " " << field[0].y << std::endl;
+  //std::cout << field[1].x << " " << field[1].y << std::endl;
 
   return field;
 }
