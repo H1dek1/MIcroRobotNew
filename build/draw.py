@@ -11,6 +11,7 @@ def main():
     data = np.loadtxt("../result/result.txt", skiprows=2)
     DT = 0.01
     AbyL = 0.3
+    para_abs = 110
     
     ext_x        = data[:, 0]
     ext_y        = data[:, 1]
@@ -32,8 +33,8 @@ def main():
 
     para_x = center_x - 0.5*np.sqrt(3)*np.sin(center_angle)
     para_y = center_y + 0.5*np.sqrt(3)*np.cos(center_angle)
-    para_u = data[:, 7] / 100 * (2*AbyL)
-    para_v = data[:, 8] / 100 * (2*AbyL)
+    para_u = data[:, 7] / 110 * (2*AbyL)
+    para_v = data[:, 8] / 110 * (2*AbyL)
     
     fig, axes = plt.subplots(1, 2, figsize=(10, 8))
     matplotlibSetting(fig, axes)

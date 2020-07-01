@@ -15,7 +15,7 @@ namespace MicroRobot
 
 const std::string FILENAME = "../result/result.txt";
 
-const int    NUM_CYCLES = 2;
+const int    NUM_CYCLES = 6;
 const double DT = 1.0e-4;
 const double OUT_TIME = 1.0e-2;
 const double OMEGA = 2.0 * M_PI;
@@ -30,9 +30,11 @@ const double AbyL   = 0.3;
 const double AbyL3   = AbyL * AbyL * AbyL;
 
 const double HIGHT = sqrt(3.0)/2.0;
-const double INIT_ANGLE_1 = 0.0;
-const double INIT_ANGLE_2 = 0.0;
-const double FIELD_ANGLE = 0.0;
+const double INIT_ANGLE_1 = M_PI;
+const double INIT_ANGLE_2 = M_PI;
+const double ROBOT_ANGLE  = M_PI;
+
+const double FIELD_ANGLE  = M_PI/6;
 
 }
 
