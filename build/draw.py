@@ -32,8 +32,8 @@ def main():
 
     para_x = center_x - 0.5*np.sqrt(3)*np.sin(center_angle)
     para_y = center_y + 0.5*np.sqrt(3)*np.cos(center_angle)
-    para_u = data[:, 7] / 10 * (2*AbyL)
-    para_v = data[:, 8] / 10 * (2*AbyL)
+    para_u = data[:, 7] / 100 * (2*AbyL)
+    para_v = data[:, 8] / 100 * (2*AbyL)
     
     fig, axes = plt.subplots(1, 2, figsize=(10, 8))
     matplotlibSetting(fig, axes)
@@ -66,7 +66,7 @@ def matplotlibSetting(fig, axes):
     axes[0].set_xlabel('$x/l$', fontsize=15)
     axes[0].set_ylabel('$y/l$', fontsize=15)
     axes[0].set_xlim(-3, 3)
-    axes[0].set_ylim(-1, 4)
+    axes[0].set_ylim(-4, 4)
     axes[0].set_aspect('equal')
 
 if __name__ == '__main__':

@@ -41,9 +41,7 @@ void Swimmer::update(Vector2D ext_field)
   /* Rotating permanent particles */
   calcCenterVelocity( ext_field );
   /* move all particles */
-  //updateParticlesPosition();
-  std::cout << para.moment().x << " " << para.moment().y << std::endl;
-  std::cout << perm[0].m_torque << std::endl;
+  updateParticlesPosition();
 }
 
 void Swimmer::calcCenterVelocity(Vector2D ext_field)
@@ -54,30 +52,18 @@ void Swimmer::calcCenterVelocity(Vector2D ext_field)
   std::array<Vector2D, 2> velocity;
   field = calcFieldOnParticles( ext_field );
 
-  ///std::cout << "------------------------------------" << std::endl;
-  ///std::cout << "field" << std::endl;
-  ///std::cout << field[0].x << std::endl;
-  ///std::cout << field[0].y << std::endl;
-  ///std::cout << field[1].x << std::endl;
-  ///std::cout << field[1].y << std::endl;
-  ///std::cout << field[0].degrees()-90 << std::endl;
-  ///std::cout << field[1].degrees()-90 << std::endl;
-
-  ///std::cout << "permanent angle" << std::endl;
-  ///std::cout << perm[0].moment().degrees()-90 << std::endl;
-  ///std::cout << perm[1].moment().degrees()-90 << std::endl;
-  ///tmp_field[0].assign(12.9904, 12.5);
-  ///tmp_field[1].assign(-12.9904, 12.5);
-
   for(int id = 0; id < 2; id++){
     torque[id] = perm[id].calcTorque( field[id] );
   }
-  //std::cout << "torque" << std::endl;
-  //std::cout << torque[0] << std::endl;
-  //std::cout << torque[1] << std::endl;
+  std::cout << "torque" << std::endl;
+  std::cout << torque[0] << std::endl;
+  std::cout << torque[1] << std::endl;
 
     velocity[0] = perm[0].rotate(torque[1], perm[1].pos());
     velocity[1] = perm[1].rotate(torque[0], perm[0].pos());
+    std::cout << "particle moment" << std::endl;
+    std::cout << perm[0].moment().x << " " << perm[0].moment().y << std::endl;
+    std::cout << perm[1].moment().x << " " << perm[1].moment().y << std::endl;
     ////std::cout << "torque[0]=" << torque[0] << std::endl;
     ////std::cout << "torque[1]=" << torque[1] << std::endl;
   m_center_vel = (velocity[0] + velocity[1])/2;
@@ -106,22 +92,22 @@ std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
   field[0] = ext_field * ALPHA;
   field[1] = ext_field * ALPHA;
   std::cout << "field ext" << std::endl;
-  std::cout << field[0].x << std::endl;
-  std::cout << field[0].y << std::endl;
+  std::cout << field[0].x << " " << field[0].y << std::endl;
+  std::cout << field[1].x << " " << field[1].y << std::endl;
 
   field[0] += dipole_field[0];
   field[1] += dipole_field[1];
   
   std::cout << "field ext+dipole" << std::endl;
-  std::cout << field[0].x << std::endl;
-  std::cout << field[0].y << std::endl;
+  std::cout << field[0].x << " " << field[0].y << std::endl;
+  std::cout << field[1].x << " " << field[1].y << std::endl;
 
   field[0] += para_field[0];
   field[1] += para_field[1];
 
   std::cout << "field ext+dipole+para" << std::endl;
-  std::cout << field[0].x << std::endl;
-  std::cout << field[0].y << std::endl;
+  std::cout << field[0].x << " " << field[0].y << std::endl;
+  std::cout << field[1].x << " " << field[1].y << std::endl;
 
   return field;
 }
@@ -159,7 +145,6 @@ void Swimmer::calcParamagneticMoment(Vector2D ext_field)
     all_field += dipole_field;
   }
   para.calcMoment( all_field );
-
 }
 
 Vector2D Swimmer::pos() const

@@ -17,12 +17,12 @@ void Environment::run()
 {
   swimmer.reset();
   field.reset();
-  for(int iter = 0; iter < SLEEP_ITER; iter++){
-    swimmer.update( field.moment() );
-  }
+  //for(int iter = 0; iter < SLEEP_ITER; iter++){
+  //  swimmer.update( field.moment() );
+  //}
 
-  //for(int iter = 0; iter < MAX_ITER/2; iter++){
-  for(int iter = 0; iter < 1; iter++){
+  for(int iter = 0; iter < MAX_ITER; iter++){
+  //for(int iter = 0; iter < 1; iter++){
     if(iter%5000 == 0)
       std::cout << iter << "/" << MAX_ITER << std::endl;
     
