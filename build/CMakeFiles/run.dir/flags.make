@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=c++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hideki/Documents/MicroRobotNew/src/../include 
+CXX_INCLUDES = -I/home/hideki-lab/Documents/MicrorobotNew/src/../include 
 

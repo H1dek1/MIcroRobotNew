@@ -9,13 +9,17 @@
 #include <string>
 #include <tuple>
 #include <utility>
+#include <numeric>
 
 namespace MicroRobot
 {
 
-const std::string FILENAME = "../result/result.txt";
+const std::string FILENAME1 = "../result/result.txt";
+const std::string FILENAME2 = "../result/potential.txt";
 
-const int    NUM_CYCLES = 3;
+/* robot simulation */
+const bool   MOVE = true;
+const int    NUM_CYCLES = 1;
 const double DT = 1.0e-4;
 const double OUT_TIME = 1.0e-2;
 const double OMEGA = 2.0 * M_PI;
@@ -35,6 +39,13 @@ const double INIT_ANGLE_2 = -M_PI/2;
 const double ROBOT_ANGLE  = M_PI/2;
 
 const double FIELD_ANGLE  = -M_PI/2;
+
+/* potential calculation */
+const double THETA_MIN = -M_PI;
+const double THETA_MAX =  M_PI;
+const int    NUM_DIGITIZE = 10;
+const double D_THETA   = M_PI/10;
+const double NUM_NODES = (THETA_MAX - THETA_MIN)/D_THETA+1;
 
 }
 

@@ -22,7 +22,8 @@ class Environment{
     void output();
 
   private:
-    std::ofstream fout;
+    std::ofstream fout1;
+    std::ofstream fout2;
 };
 
 }

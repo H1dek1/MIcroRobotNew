@@ -32,6 +32,14 @@ void Swimmer::reset()
   perm[1].reset(pos_2, INIT_ANGLE_2);
   para.reset(pos_3);
   
+  /* GRID */
+  for(int id = 0; id < (THETA_MAX - THETA_MIN)/D_THETA+1; id++){
+    theta1_arr.push_back(THETA_MIN + (id*D_THETA));
+    theta2_arr.push_back(THETA_MIN + (id*D_THETA));
+    Vector2D moment(cos(THETA_MIN + (id*D_THETA)), sin(THETA_MIN + (id*D_THETA)));
+    moment0_arr.push_back(moment);
+    moment1_arr.push_back(moment);
+  }
 }
 
 void Swimmer::update(Vector2D ext_field)
@@ -41,7 +49,7 @@ void Swimmer::update(Vector2D ext_field)
   /* Rotating permanent particles */
   calcCenterVelocity( ext_field );
   /* move all particles */
-  updateParticlesPosition();
+  if(MOVE == true) updateParticlesPosition();
 }
 
 void Swimmer::calcCenterVelocity(Vector2D ext_field)
@@ -150,7 +158,34 @@ std::tuple<double, double, Vector2D> Swimmer::getMoments()
   return {perm[0].moment().radians(), perm[1].moment().radians(), para.moment()};
 }
 
+std::tuple<double,
+           std::vector<double>,
+           std::vector<double>,
+           std::vector<std::vector<double>>>
+Swimmer::extPotential(Vector2D ext_field) const
+{
+  std::array<double, 2> ext_potential;
+  std::vector<std::vector<double>>
+    ext_potential_arr(NUM_NODES, std::vector<double>(NUM_NODES));
 
+  /* calc potential */
+  for(int i = 0; i < NUM_NODES; i++){
+    double potential0 = -2 * ALPHA * moment0_arr[i].dot(ext_field);
+    for(int j = 0; j < NUM_NODES; j++){
+      double potential1 = -2 * ALPHA * moment1_arr[j].dot(ext_field);
+
+      ext_potential_arr[i][j] = (potential0+potential1);
+    }
+  }
+
+  ext_potential[0] = -2 * ALPHA * perm[0].moment().dot(ext_field);
+  ext_potential[1] = -2 * ALPHA * perm[1].moment().dot(ext_field);
+
+  return {(ext_potential[0]+ext_potential[1]), 
+          theta1_arr,
+          theta2_arr,
+          ext_potential_arr};
+}
 Swimmer::~Swimmer()
 {
 }

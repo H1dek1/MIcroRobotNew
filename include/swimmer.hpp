@@ -18,6 +18,12 @@ class Swimmer{
     double m_center_angle;
     double m_center_angle_vel;
 
+  private:
+    std::vector<double>   theta1_arr;
+    std::vector<double>   theta2_arr;
+    std::vector<Vector2D> moment0_arr;
+    std::vector<Vector2D> moment1_arr;
+
   public:
     Swimmer();
     ~Swimmer();
@@ -28,6 +34,13 @@ class Swimmer{
     Vector2D pos() const;
     double angle() const;
     std::tuple<double, double, Vector2D> getMoments();
+
+  public:
+    std::tuple<double,
+               std::vector<double>,
+               std::vector<double>,
+               std::vector<std::vector<double>>>
+    extPotential(Vector2D ext_field) const;
 
   private:
     void calcParamagneticMoment(Vector2D ext_field);
