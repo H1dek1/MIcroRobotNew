@@ -34,13 +34,14 @@ class Swimmer{
     Vector2D pos() const;
     double angle() const;
     std::tuple<double, double, Vector2D> getMoments();
+    std::tuple<Vector2D, double> getPose() const;
 
   public:
-    std::tuple<double,
-               std::vector<double>,
-               std::vector<double>,
-               std::vector<std::vector<double>>>
-    extPotential(Vector2D ext_field) const;
+    //std::tuple<double,
+    //           std::vector<double>,
+    //           std::vector<double>,
+    //           std::vector<std::vector<double>>>
+    double extPotential(Vector2D ext_field) const;
 
   private:
     void calcParamagneticMoment(Vector2D ext_field);

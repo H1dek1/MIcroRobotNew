@@ -23,7 +23,6 @@ class Environment{
 
   private:
     std::ofstream fout1;
-    std::ofstream fout2;
 };
 
 }

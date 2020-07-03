@@ -42,6 +42,12 @@ void Swimmer::reset()
   }
 }
 
+std::tuple<Vector2D, double> Swimmer::getPose() const
+{
+  return {m_center_pos, m_center_angle};
+}
+
+
 void Swimmer::update(Vector2D ext_field)
 {
   /* Paramagnetic Moment */
@@ -155,36 +161,21 @@ double Swimmer::angle() const
 
 std::tuple<double, double, Vector2D> Swimmer::getMoments()
 {
-  return {perm[0].moment().radians(), perm[1].moment().radians(), para.moment()};
+  return {perm[0].radians(), perm[1].radians(), para.moment()};
 }
 
-std::tuple<double,
-           std::vector<double>,
-           std::vector<double>,
-           std::vector<std::vector<double>>>
-Swimmer::extPotential(Vector2D ext_field) const
+//std::tuple<double,
+//           std::vector<double>,
+//           std::vector<double>,
+//           std::vector<std::vector<double>>>
+//Swimmer::extPotential(Vector2D ext_field) const
+double Swimmer::extPotential(Vector2D ext_field) const
 {
   std::array<double, 2> ext_potential;
-  std::vector<std::vector<double>>
-    ext_potential_arr(NUM_NODES, std::vector<double>(NUM_NODES));
-
-  /* calc potential */
-  for(int i = 0; i < NUM_NODES; i++){
-    double potential0 = -2 * ALPHA * moment0_arr[i].dot(ext_field);
-    for(int j = 0; j < NUM_NODES; j++){
-      double potential1 = -2 * ALPHA * moment1_arr[j].dot(ext_field);
-
-      ext_potential_arr[i][j] = (potential0+potential1);
-    }
-  }
-
   ext_potential[0] = -2 * ALPHA * perm[0].moment().dot(ext_field);
   ext_potential[1] = -2 * ALPHA * perm[1].moment().dot(ext_field);
 
-  return {(ext_potential[0]+ext_potential[1]), 
-          theta1_arr,
-          theta2_arr,
-          ext_potential_arr};
+  return (ext_potential[0]+ext_potential[1]);
 }
 Swimmer::~Swimmer()
 {
