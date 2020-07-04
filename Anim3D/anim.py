@@ -27,16 +27,7 @@ def main():
     surf = ax.plot_surface(X1-np.pi/2, X2-np.pi/2, Y_plot, cmap='binary', linewidth=0)
     fig.colorbar(surf)
     plt.show()
-    #ims = []
 
-    #for step in tqdm(range(ext_y.size)):
-    #    Y_plot = ext_potential(X1, X2, 0, ext_y[step])
-    #    surf = ax.plot_surface(X1-np.pi/2, X2-np.pi/2, Y_plot, cmap='binary', linewidth=0)
-    #    #a = fig.colorbar(surf)
-    #    ims.append(surf)
-    ##fig.savefig('image.png')
-    #ani = animation.ArtistAnimation(fig, ims, interval=100)
-    #ani.save('anim.mp4', writer='ffmpeg')
 
 def ext_potential(theta1, theta2, ext_x, ext_y):
     ext_field = np.array([ext_x, ext_y])

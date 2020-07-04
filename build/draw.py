@@ -17,15 +17,16 @@ def main():
     AbyL = 0.3
     para_abs = 130
     
-    ext_x        = data[:, 0]
-    ext_y        = data[:, 1]
-    center_x     = data[:, 2]
-    center_y     = data[:, 3]
-    center_angle = data[:, 4]
-    theta_1      = data[:, 5]
-    theta_2      = data[:, 6]
-    para_u       = data[:, 7]
-    para_v       = data[:, 8]
+    ext_x         = data[:, 0]
+    ext_y         = data[:, 1]
+    center_x      = data[:, 2]
+    center_y      = data[:, 3]
+    center_angle  = data[:, 4]
+    theta_1       = data[:, 5]
+    theta_2       = data[:, 6]
+    para_u        = data[:, 7]
+    para_v        = data[:, 8]
+    ext_potential = data[:, 9]
 
     perm1_x = center_x - 0.5*np.cos(center_angle)
     perm1_y = center_y - 0.5*np.sin(center_angle)
@@ -80,7 +81,7 @@ def main():
     
     ani = animation.ArtistAnimation(fig, ims, interval=(DT*5)*1.0e+3)
     print('Saving animation ...')
-    ani.save('../test.mp4', writer='ffmpeg')
+    tqdm(ani.save('../test.mp4', writer='ffmpeg'))
 
 def matplotlibSetting(fig, axes):
     axes[0].set_xlabel('$x/l$', fontsize=15)
