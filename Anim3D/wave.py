@@ -49,7 +49,7 @@ def update(i):
         elapsed_time = time.time() - start
         timebyiter = elapsed_time / i
         remaining_time = (Bext_y.size - i) * timebyiter
-        print("{}/{} remaining time : {}m {}s".format(i+1, Bext_y.size, int(remaining_time/60), int(remaining_time%60))
+        print("{}/{} remaining time : {}m {}s".format(i+1, Bext_y.size, int(remaining_time/60), int(remaining_time%60)))
     if i != 0:
         ax1.cla()
         ax2.cla()
