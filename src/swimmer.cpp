@@ -164,11 +164,6 @@ std::tuple<double, double, Vector2D> Swimmer::getMoments()
   return {perm[0].radians(), perm[1].radians(), para.moment()};
 }
 
-//std::tuple<double,
-//           std::vector<double>,
-//           std::vector<double>,
-//           std::vector<std::vector<double>>>
-//Swimmer::extPotential(Vector2D ext_field) const
 double Swimmer::extPotential(Vector2D ext_field) const
 {
   std::array<double, 2> ext_potential;
@@ -177,6 +172,7 @@ double Swimmer::extPotential(Vector2D ext_field) const
 
   return (ext_potential[0]+ext_potential[1]);
 }
+
 Swimmer::~Swimmer()
 {
 }

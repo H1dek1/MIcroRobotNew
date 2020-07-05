@@ -40,7 +40,8 @@ def init():
     ax1.set_ylabel("$\\theta_2$")
     ax1.view_init(elev=60, azim=-45)
     Y = ext_potential(X1, X2, 0, Bext_y[0])
-    surf = ax1.plot_surface(X1, X2, Y, cmap='plasma', linewidth=0, rstride=1, cstride=1, antialiased=False)
+    surf = ax1.plot_surface(X1, X2, Y, cmap='plasma', linewidth=0, rstride=5, cstride=5, antialiased=False)
+    ax1.plot([0], [0], [400], marker='o', color='red')
     #fig.colorbar(surf)
 
 start = time.time()
@@ -59,7 +60,8 @@ def update(i):
     ax1.set_ylabel("$\\theta_2$")
     ax1.view_init(elev=60, azim=-45)
     Y = ext_potential(X1, X2, 0, Bext_y[i])
-    surf = ax1.plot_surface(X1, X2, Y, cmap='plasma', linewidth=0, rstride=1, cstride=1, antialiased=False)
+    surf = ax1.plot_surface(X1, X2, Y, cmap='plasma', linewidth=0, rstride=5, cstride=5, antialiased=False, zorder=1)
+    ax1.plot([0], [0], [400], marker='o', color='red', zorder=2)
 
 ani = animation.FuncAnimation(fig, update, init_func=init, interval=100, frames=Bext_y.size)
 ani.save('rough2.mp4', writer='ffmpeg')
