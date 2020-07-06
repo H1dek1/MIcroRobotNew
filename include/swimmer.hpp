@@ -37,9 +37,10 @@ class Swimmer{
     std::tuple<Vector2D, double> getPose() const;
 
   public:
+    double allPotential(Vector2D ext_field) const;
     double extPotential(Vector2D ext_field) const;
     double dipolePotential() const;
-    double paraExtPotentital(Vector2D ext_field) const;
+    double paraExtPotential() const;
     double paraDipolePotential() const;
 
   private:

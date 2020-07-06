@@ -17,12 +17,17 @@ void Environment::run()
 {
   swimmer.reset();
   field.reset();
-  for(int iter = 0; iter < SLEEP_ITER; iter++){
-    swimmer.update( field.moment() );
-  }
+  //for(int iter = 0; iter < SLEEP_ITER; iter++){
+  //  swimmer.update( field.moment() );
+  //}
 
-  for(int iter = 0; iter < MAX_ITER; iter++){
-  //for(int iter = 0; iter < 1; iter++){
+  //for(int iter = 0; iter < MAX_ITER; iter++){
+  for(int iter = 0; iter < 10; iter++){
+    std::cout << "ext: " << swimmer.extPotential( field.moment() ) << std::endl;
+    std::cout << "dipole: " << swimmer.dipolePotential() << std::endl;
+    //std::cout << "extpara: " << swimmer.paraExtPotential() << std::endl;
+    std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
+    std::cout << "--------------------" << std::endl;
     if(iter%5000 == 0){
       auto [pos, angle] = swimmer.getPose();
       std::cout << std::setprecision(5) << iter << "/" << MAX_ITER;

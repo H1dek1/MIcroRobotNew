@@ -85,8 +85,8 @@ def main(start):
         ax1.plot([para_x[0], perm1_x[0]], [para_y[0], perm1_y[0]], '-', color='k', lw=4, zorder=1)
 
         Y = ext_potential_surface(X1, X2, ext_x[0], ext_y[0])
-        surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=False, zorder=1)
-        ax2.plot([theta_1[0]], [-theta_2[0]], [ext_potential[0]], marker='o', color='red', markersize=15, zorder=2, alpha=0.4)
+        surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=True, zorder=1)
+        ax2.plot([theta_1[0]], [-theta_2[0]], [ext_potential[0]], marker='o', color='red', markersize=5, zorder=2, alpha=0.5)
 
 
     def update(i):
@@ -120,10 +120,8 @@ def main(start):
 
 
         Y = ext_potential_surface(X1, X2, ext_x[i], ext_y[i])
-        surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=False, zorder=1, alpha=0.4)
-        ax2.plot([theta_1[i]], [-theta_2[i]], [ext_potential[i]], marker='o', color='red', markersize=15, zorder=2)
-        if (i+1)%10 == 0:
-            print(theta_1[i], theta_2[i])
+        surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=True, zorder=1, alpha=0.5)
+        ax2.plot([theta_1[i]], [-theta_2[i]], [ext_potential[i]], marker='o', color='red', markersize=5, zorder=2)
 
     
     ani = animation.FuncAnimation(fig, update, init_func=init, interval=(DT*5)*1.0e+3, frames=ext_x.size)
@@ -140,7 +138,8 @@ def matplotlibSetting(ax):
 def matplotlibSetting3D(ax):
     ax.set_xlim(-4*np.pi, 4*np.pi)
     ax.set_ylim(-4*np.pi, 4*np.pi)
-    ax.set_zlim(-400, 400)
+    ax.set_zlim(-800, 800)
+    ax.set_zticks([-800, -400, 0, 400, 800])
     ax.set_xlabel('$\\theta_1$')
     ax.set_ylabel('$\\theta_2$')
     ax.view_init(elev=80, azim=-45)

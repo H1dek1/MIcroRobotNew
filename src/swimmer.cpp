@@ -164,6 +164,16 @@ std::tuple<double, double, Vector2D> Swimmer::getMoments()
   return {perm[0].radians(), perm[1].radians(), para.moment()};
 }
 
+double Swimmer::allPotential(Vector2D ext_field) const
+{
+  double all_potential = 0;
+  all_potential += extPotential( ext_field );
+  all_potential += dipolePotential();
+  //all_potential += paraExtPotential();
+
+  return all_potential;
+}
+
 double Swimmer::extPotential(Vector2D ext_field) const
 {
   std::array<double, 2> ext_potential;
@@ -171,6 +181,31 @@ double Swimmer::extPotential(Vector2D ext_field) const
   ext_potential[1] = -2 * ALPHA * perm[1].moment().dot(ext_field);
 
   return (ext_potential[0]+ext_potential[1]);
+}
+
+double Swimmer::dipolePotential() const
+{
+  double dipole_potential;
+  double phi_0 = perm[0].radians();
+  double phi_1 = perm[1].radians();
+  double psi = m_center_angle;
+  dipole_potential = - (3.0 * cos(phi_0 + phi_1 - (2*psi)) + cos(phi_0 - phi_1));
+
+  return dipole_potential;
+}
+
+double Swimmer::paraExtPotential() const
+{
+  std::array<double, 2> para_ext_potential;
+  std::array<Vector2D, 2> para_field;
+
+  para_field[0] = (para.pos() - perm[0].pos())*3*para.moment().innerProduct(para.pos() - perm[0].pos()) - para.moment();
+  para_field[1] = (para.pos() - perm[1].pos())*3*para.moment().innerProduct(para.pos() - perm[1].pos()) - para.moment();
+
+  //para_ext_potential[0] = -2 * ALPHA * perm[0].moment().dot(para_field[0]);
+  //para_ext_potential[1] = -2 * ALPHA * perm[1].moment().dot(para_field[1]);
+
+  return (para_ext_potential[0]+para_ext_potential[1]);
 }
 
 Swimmer::~Swimmer()
