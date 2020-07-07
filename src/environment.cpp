@@ -25,7 +25,7 @@ void Environment::run()
   for(int iter = 0; iter < 10; iter++){
     std::cout << "ext: " << swimmer.extPotential( field.moment() ) << std::endl;
     std::cout << "dipole: " << swimmer.dipolePotential() << std::endl;
-    //std::cout << "extpara: " << swimmer.paraExtPotential() << std::endl;
+    std::cout << "extpara: " << swimmer.paraExtPotential( field.moment() ) << std::endl;
     std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
     std::cout << "--------------------" << std::endl;
     if(iter%5000 == 0){

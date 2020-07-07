@@ -40,7 +40,7 @@ class Swimmer{
     double allPotential(Vector2D ext_field) const;
     double extPotential(Vector2D ext_field) const;
     double dipolePotential() const;
-    double paraExtPotential() const;
+    double paraExtPotential(Vector2D ext_field) const;
     double paraDipolePotential() const;
 
   private:
