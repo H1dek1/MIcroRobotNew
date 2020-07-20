@@ -17,17 +17,18 @@ void Environment::run()
 {
   swimmer.reset();
   field.reset();
-  //for(int iter = 0; iter < SLEEP_ITER; iter++){
-  //  swimmer.update( field.moment() );
-  //}
+  for(int iter = 0; iter < SLEEP_ITER; iter++){
+    swimmer.update( field.moment() );
+  }
 
-  //for(int iter = 0; iter < MAX_ITER; iter++){
-  for(int iter = 0; iter < 10; iter++){
-    std::cout << "ext: " << swimmer.extPotential( field.moment() ) << std::endl;
-    std::cout << "dipole: " << swimmer.dipolePotential() << std::endl;
-    std::cout << "extpara: " << swimmer.paraExtPotential( field.moment() ) << std::endl;
-    std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
-    std::cout << "--------------------" << std::endl;
+  for(int iter = 0; iter < MAX_ITER; iter++){
+  //for(int iter = 0; iter < 10; iter++){
+    //std::cout << "ext: " << swimmer.extPotential( field.moment() ) << std::endl;
+    //std::cout << "dipole: " << swimmer.dipolePotential() << std::endl;
+    //std::cout << "extpara: " << swimmer.paraExtPotential( field.moment() ) << std::endl;
+    //std::cout << "dipolepara: " << swimmer.paraDipolePotential() << std::endl;
+    //std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
+    //std::cout << "--------------------" << std::endl;
     if(iter%5000 == 0){
       auto [pos, angle] = swimmer.getPose();
       std::cout << std::setprecision(5) << iter << "/" << MAX_ITER;
@@ -46,7 +47,7 @@ void Environment::run()
 void Environment::output()
 {
   auto [theta1, theta2, para_moment] = swimmer.getMoments();
-  double ext_potential = swimmer.extPotential( field.moment() );
+  double all_potential = swimmer.allPotential( field.moment() );
   fout1 << field.moment().x << " "
        << field.moment().y << " "
        << swimmer.pos().x << " "
@@ -56,7 +57,7 @@ void Environment::output()
        << theta2 << " "
        << para_moment.x << " "
        << para_moment.y << " "
-       << ext_potential << " "
+       << all_potential << " "
        << std::endl;
 }
 

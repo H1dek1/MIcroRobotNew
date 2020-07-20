@@ -70,3 +70,19 @@ cmath
 environment.hpp
 /home/hideki-lab/Documents/MicrorobotNew/src/environment.hpp
 
+/home/hideki-lab/Documents/MicrorobotNew/src/external_magnetic_field.cpp
+external_magnetic_field.hpp
+/home/hideki-lab/Documents/MicrorobotNew/src/external_magnetic_field.hpp
+
+/home/hideki-lab/Documents/MicrorobotNew/src/paramagnetic_particle.cpp
+paramagnetic_particle.hpp
+/home/hideki-lab/Documents/MicrorobotNew/src/paramagnetic_particle.hpp
+
+/home/hideki-lab/Documents/MicrorobotNew/src/permanent_magnetic_particle.cpp
+permanent_magnetic_particle.hpp
+/home/hideki-lab/Documents/MicrorobotNew/src/permanent_magnetic_particle.hpp
+
+/home/hideki-lab/Documents/MicrorobotNew/src/swimmer.cpp
+swimmer.hpp
+/home/hideki-lab/Documents/MicrorobotNew/src/swimmer.hpp
+

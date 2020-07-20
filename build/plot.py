@@ -14,9 +14,9 @@ ALPHA = 1.0e+2
 
 def main(start):
     N = 200
-    x1 = np.linspace(-4*np.pi, 4*np.pi, N)
-    x2 = np.linspace(-4*np.pi, 4*np.pi, N)
-    X1, X2 = np.meshgrid(x1, x2)
+    #x1 = np.linspace(-4*np.pi, 4*np.pi, N)
+    #x2 = np.linspace(-4*np.pi, 4*np.pi, N)
+    #X1, X2 = np.meshgrid(x1, x2)
 
     data = np.loadtxt("../result/result.txt", skiprows=2)
 
@@ -24,6 +24,7 @@ def main(start):
     AbyL = 0.3
     para_abs = 130
     
+    #for ax1
     ext_x         = data[:, 0]
     ext_y         = data[:, 1]
     center_x      = data[:, 2]
@@ -33,7 +34,6 @@ def main(start):
     theta_2       = data[:, 6]
     para_u        = data[:, 7]
     para_v        = data[:, 8]
-    ext_potential = data[:, 9]
 
     perm1_x = center_x - 0.5*np.cos(center_angle)
     perm1_y = center_y - 0.5*np.sin(center_angle)
@@ -51,6 +51,12 @@ def main(start):
     para_max = np.sqrt(para_u**2 + para_v**2).max()
     para_u = data[:, 7] / para_max * (2*AbyL)
     para_v = data[:, 8] / para_max * (2*AbyL)
+
+
+    #for ax2
+    all_potential = data[:, 9]
+    theta1_rel =   theta_1 - center_angle - np.pi/2
+    theta2_rel = -(theta_2 - center_angle - np.pi/2)
     
     fig = plt.figure(figsize=(10, 8))
     ax1 = fig.add_subplot(2, 1, 1)
@@ -58,13 +64,44 @@ def main(start):
 
     def ext_potential_surface(theta1, theta2, field_x, field_y):
         ext_field = np.array([field_x, field_y])
-        moment_1 = np.array([-np.sin(theta1), np.cos(theta1)]).T
-        moment_2 = np.array([-np.sin(-theta2), np.cos(-theta2)]).T
+        moment_1 = np.array([np.cos(theta1), np.sin(theta1)]).T
+        moment_2 = np.array([np.cos(theta2), np.sin(theta2)]).T
         potential = -2 * ALPHA * moment_1.dot(ext_field)
         potential += -2 * ALPHA * moment_2.dot(ext_field)
         return potential
 
+    def dipole_potential_surface(theta1, theta2, center_angle):
+        return 3*np.cos((theta1+theta2)-2*center_angle) - np.cos(theta1-theta2)
+
+    def para_ext_potential(theta1, theta2, center_angle, field_x, field_y):
+        para_moment = GAMMA * np.array([field_x, field_y])
+        moment = []
+        moment.append(np.array([-np.sin(theta1), np.cos(theta1)]).T)
+        moment.append(np.array([-np.sin(-theta2), np.cos(-theta2)]).T)
+        #1 -> para
+        unit_vec1 = np.array([
+            np.cos(np.pi/3+center_angle),
+            np.sin(np.pi/3+center_angle)
+            ])
+        
+
+
+    def all_potential_surface(theta1, theta2, center_angle, field_x, field_y):
+        all_potential = ext_potential_surface(theta1, theta2, field_x, field_y)
+        all_potential += dipole_potential_surface(theta1, theta2, center_angle)
+        #all_potential += para_ext_potential(theta1, theta2, center_angle, field_x, field_y)
+        #all_potential += para_dipole_potential(theta1, theta2)
+
+        return all_potential
+
     def init():
+        """
+        theta1 & theta2 range
+        """
+        x1 = np.linspace(-4*np.pi, 4*np.pi, N)
+        x2 = np.linspace(-4*np.pi, 4*np.pi, N)
+        X1, X2 = np.meshgrid(x1, x2)
+
         matplotlibSetting(ax1)
         matplotlibSetting3D(ax2)
         ax1.quiver(-max_X+1, -max_Y+0.5, ext_x[0], ext_y[0], color='black', angles='xy', scale_units='xy', scale=2, width=5.0e-3)
@@ -84,12 +121,23 @@ def main(start):
         ax1.plot([perm2_x[0], para_x[0]], [perm2_y[0], para_y[0]], '-', color='k', lw=4, zorder=1)
         ax1.plot([para_x[0], perm1_x[0]], [para_y[0], perm1_y[0]], '-', color='k', lw=4, zorder=1)
 
-        Y = ext_potential_surface(X1, X2, ext_x[0], ext_y[0])
+        Y = all_potential_surface((X1+center_angle[0]+np.pi/2), (-X2+center_angle[0]+np.pi/2), center_angle[0], ext_x[0], ext_y[0])
         surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=True, zorder=1)
-        ax2.plot([theta_1[0]], [-theta_2[0]], [ext_potential[0]], marker='o', color='red', markersize=5, zorder=2, alpha=0.5)
+        ax2.plot([theta1_rel[0]], [theta2_rel[0]], [all_potential[0]], marker='o', color='red', markersize=5, zorder=2, alpha=0.5)
+        print(theta_1[0])
+        print(theta_2[0])
+        print(theta1_rel[0])
+        print(theta2_rel[0])
 
 
     def update(i):
+        """
+        theta1 & theta2 range
+        """
+        x1 = np.linspace(-4*np.pi, 4*np.pi, N)
+        x2 = np.linspace(-4*np.pi, 4*np.pi, N)
+        X1, X2 = np.meshgrid(x1, x2)
+
         if (i+1)%10 == 0:
             elapsed_time = time.time() - start
             timebyiter = elapsed_time / i
@@ -119,14 +167,14 @@ def main(start):
         ax1.plot([para_x[i], perm1_x[i]], [para_y[i], perm1_y[i]], '-', color='k', lw=4, zorder=1)
 
 
-        Y = ext_potential_surface(X1, X2, ext_x[i], ext_y[i])
+        Y = all_potential_surface((X1+center_angle[0]+np.pi/2), (-X2+center_angle[0]+np.pi/2), center_angle[0], ext_x[i], ext_y[i])
         surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=True, zorder=1, alpha=0.5)
-        ax2.plot([theta_1[i]], [-theta_2[i]], [ext_potential[i]], marker='o', color='red', markersize=5, zorder=2)
+        ax2.plot([theta1_rel[i]], [theta2_rel[i]], [all_potential[i]], marker='o', color='red', markersize=5, zorder=2)
 
     
     ani = animation.FuncAnimation(fig, update, init_func=init, interval=(DT*5)*1.0e+3, frames=ext_x.size)
     print('Drawing ...')
-    ani.save('../test.mp4', writer='ffmpeg')
+    ani.save('../test2.mp4', writer='ffmpeg')
 
 def matplotlibSetting(ax):
     ax.set_xlabel('$x/l$', fontsize=15)

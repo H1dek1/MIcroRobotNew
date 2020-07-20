@@ -19,7 +19,9 @@ const std::string FILENAME1 = "../result/result.txt";
 const std::string FILENAME2 = "../result/potential.txt";
 
 /* robot simulation */
-const bool   MOVE = true;
+const bool   MOVE      = true;
+const bool   NEW_MODEL = false;
+
 const int    NUM_CYCLES = 2;
 const double DT = 1.0e-4;
 const double OUT_TIME = 1.0e-2;
@@ -37,7 +39,7 @@ const double AbyL3   = AbyL * AbyL * AbyL;
 const double HIGHT = sqrt(3.0)/2.0;
 const double INIT_ANGLE_1 = -M_PI/2;
 const double INIT_ANGLE_2 = -M_PI/2;
-const double ROBOT_ANGLE  = M_PI/2;
+const double ROBOT_ANGLE  = -M_PI/2;
 
 const double FIELD_ANGLE  = -M_PI/2;
 
