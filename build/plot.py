@@ -124,6 +124,7 @@ def main(start):
         Y = all_potential_surface((X1+center_angle[0]+np.pi/2), (-X2+center_angle[0]+np.pi/2), center_angle[0], ext_x[0], ext_y[0])
         surf = ax2.plot_surface(X1, X2, Y, cmap='gnuplot', linewidth=0, rstride=5, cstride=5, antialiased=True, zorder=1)
         ax2.plot([theta1_rel[0]], [theta2_rel[0]], [all_potential[0]], marker='o', color='red', markersize=5, zorder=2, alpha=0.5)
+        bar = fig.colorbar(surf)
         print(theta_1[0])
         print(theta_2[0])
         print(theta1_rel[0])
