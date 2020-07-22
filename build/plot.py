@@ -175,7 +175,7 @@ def main(start):
     
     ani = animation.FuncAnimation(fig, update, init_func=init, interval=(DT*5)*1.0e+3, frames=ext_x.size)
     print('Drawing ...')
-    ani.save('../test2.mp4', writer='ffmpeg')
+    ani.save('../aaa.mp4', writer='ffmpeg')
 
 def matplotlibSetting(ax):
     ax.set_xlabel('$x/l$', fontsize=15)

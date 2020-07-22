@@ -145,7 +145,7 @@ void Swimmer::calcParamagneticMoment(Vector2D ext_field)
       dipole_field *= 3 * para2perm.dot(perm[id].moment());
       dipole_field -= perm[id].moment();
       dipole_field /= ALPHA;
-      //all_field += dipole_field;
+      all_field += dipole_field;
     }
   }
   para.calcMoment( all_field );
