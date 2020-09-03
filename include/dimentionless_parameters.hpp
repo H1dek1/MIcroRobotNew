@@ -11,6 +11,7 @@
 #include <utility>
 #include <numeric>
 #include <iomanip>
+#include <stdlib.h>
 
 namespace MicroRobot
 {

@@ -13,9 +13,14 @@ Environment::Environment()
   fout1 << "# ext_x ext_y center_x center_y angle theta1 theta2 moment3_norm moment3_angle ext_potential" << std::endl;
 }
 
-void Environment::run()
+void Environment::run(
+    bool can_move,
+    bool new_model,
+    double alpha,
+    double beta,
+    double gamma)
 {
-  swimmer.reset();
+  swimmer.reset(can_move, new_model, alpha, beta, gamma);
   field.reset();
   for(int iter = 0; iter < SLEEP_ITER; iter++){
     swimmer.update( field.moment() );

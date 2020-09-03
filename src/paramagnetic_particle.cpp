@@ -10,8 +10,9 @@ ParamagneticParticle::ParamagneticParticle()
 {
 }
 
-void ParamagneticParticle::reset(Vector2D init_pos)
+void ParamagneticParticle::reset(Vector2D init_pos, double gamma_)
 {
+  gamma = gamma_;
   m_pos = init_pos;
 }
 
@@ -28,7 +29,7 @@ Vector2D ParamagneticParticle::moment() const
 void ParamagneticParticle::calcMoment(Vector2D external_field)
 {
   m_moment = external_field;
-  m_moment *= GAMMA;
+  m_moment *= gamma;
   //std::cout << "para Moment" << std::endl;
   //std::cout << m_moment.degrees() << std::endl;
 }

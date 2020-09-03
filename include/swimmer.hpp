@@ -17,6 +17,10 @@ class Swimmer{
     Vector2D m_center_vel;
     double m_center_angle;
     double m_center_angle_vel;
+    bool move_flag;
+    bool new_flag;
+    double alpha;
+    double gamma;
 
   private:
     std::vector<double>   theta1_arr;
@@ -27,7 +31,8 @@ class Swimmer{
   public:
     Swimmer();
     ~Swimmer();
-    void reset();
+    void reset(bool can_move, bool new_model,
+        double alpha_, double beta_, double gamma_);
 
   public:
     void update(Vector2D ext_field);

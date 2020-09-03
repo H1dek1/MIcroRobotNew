@@ -10,8 +10,9 @@ PermanentParticle::PermanentParticle()
 {
 }
 
-void PermanentParticle::reset(Vector2D init_pos, double init_angle)
+void PermanentParticle::reset(Vector2D init_pos, double init_angle, double beta_)
 {
+  beta = beta_;
   m_pos = init_pos;
   m_angle = init_angle+(M_PI/2);
   m_moment.setPolar(1.0, m_angle);
@@ -40,11 +41,11 @@ double PermanentParticle::calcTorque(Vector2D field)
 
 Vector2D PermanentParticle::rotate(double ext_torque, Vector2D rel_pos)
 {
-  m_omega = (BETA/AbyL3)*m_torque - (BETA/2)*ext_torque;
+  m_omega = (beta/AbyL3)*m_torque - (beta/2)*ext_torque;
   m_angle += m_omega*DT;
   m_moment.setPolar(1.0, m_angle);
-  m_vel.x = -BETA*(rel_pos.y - m_pos.y) * m_torque;
-  m_vel.y =  BETA*(rel_pos.x - m_pos.x) * m_torque;
+  m_vel.x = -beta*(rel_pos.y - m_pos.y) * m_torque;
+  m_vel.y =  beta*(rel_pos.x - m_pos.x) * m_torque;
   return m_vel;
 }
 

@@ -10,8 +10,13 @@ Swimmer::Swimmer()
 {
 }
 
-void Swimmer::reset()
+//void Swimmer::reset()
+void Swimmer::reset(bool can_move, bool new_model, double alpha_, double beta_, double gamma_)
 {
+  move_flag = can_move;
+  new_flag = new_model;
+  alpha = alpha_;
+  gamma = gamma_;
   m_center_pos.assign(0.0, 0.0);
   m_center_angle = ROBOT_ANGLE;
 
@@ -28,9 +33,9 @@ void Swimmer::reset()
       m_center_pos.y + HIGHT*cos(m_center_angle)
       );
 
-  perm[0].reset(pos_1, INIT_ANGLE_1);
-  perm[1].reset(pos_2, INIT_ANGLE_2);
-  para.reset(pos_3);
+  perm[0].reset(pos_1, INIT_ANGLE_1, beta_);
+  perm[1].reset(pos_2, INIT_ANGLE_2, beta_);
+  para.reset(pos_3, gamma_);
   
   /* GRID */
   for(int id = 0; id < (THETA_MAX - THETA_MIN)/D_THETA+1; id++){
@@ -55,7 +60,7 @@ void Swimmer::update(Vector2D ext_field)
   /* Rotating permanent particles */
   calcCenterVelocity( ext_field );
   /* move all particles */
-  if(MOVE == true) updateParticlesPosition();
+  if(move_flag == true) updateParticlesPosition();
 }
 
 void Swimmer::calcCenterVelocity(Vector2D ext_field)
@@ -91,8 +96,8 @@ std::array<Vector2D, 2> Swimmer::calcFieldOnParticles(Vector2D ext_field)
   para_field[0] = (para.pos() - perm[0].pos())*3*para.moment().innerProduct(para.pos() - perm[0].pos()) - para.moment();
   para_field[1] = (para.pos() - perm[1].pos())*3*para.moment().innerProduct(para.pos() - perm[1].pos()) - para.moment();
 
-  field[0] = ext_field * ALPHA;
-  field[1] = ext_field * ALPHA;
+  field[0] = ext_field * alpha;
+  field[1] = ext_field * alpha;
   //std::cout << "field=ext" << std::endl;
   //std::cout << field[0].x << " " << field[0].y << std::endl;
   //std::cout << field[1].x << " " << field[1].y << std::endl;
@@ -137,14 +142,14 @@ void Swimmer::calcParamagneticMoment(Vector2D ext_field)
 {
   //set paramagnetic moment
   Vector2D all_field = ext_field;
-  if(NEW_MODEL){
+  if(new_flag){
     for(int id = 0; id < 2; id++){
       Vector2D para2perm = perm[id].pos() - para.pos();
 
       Vector2D dipole_field = para2perm;
       dipole_field *= 3 * para2perm.dot(perm[id].moment());
       dipole_field -= perm[id].moment();
-      dipole_field /= ALPHA;
+      dipole_field /= alpha;
       all_field += dipole_field;
     }
   }
@@ -172,7 +177,7 @@ double Swimmer::allPotential(Vector2D ext_field) const
   all_potential += extPotential( ext_field );
   all_potential += dipolePotential();
   all_potential += paraExtPotential( ext_field );
-  if(NEW_MODEL){
+  if(new_flag){
     all_potential += paraDipolePotential();
   }
 
@@ -182,8 +187,8 @@ double Swimmer::allPotential(Vector2D ext_field) const
 double Swimmer::extPotential(Vector2D ext_field) const
 {
   std::array<double, 2> ext_potential;
-  ext_potential[0] = -2 * ALPHA * perm[0].moment().dot(ext_field);
-  ext_potential[1] = -2 * ALPHA * perm[1].moment().dot(ext_field);
+  ext_potential[0] = -2 * alpha * perm[0].moment().dot(ext_field);
+  ext_potential[1] = -2 * alpha * perm[1].moment().dot(ext_field);
 
   return (ext_potential[0]+ext_potential[1]);
 }
@@ -204,7 +209,7 @@ double Swimmer::paraExtPotential(Vector2D ext_field) const
   std::array<double, 2> para_ext_potential;
   std::array<Vector2D, 2> para_field;
 
-  Vector2D para_ext_moment = ext_field * GAMMA;
+  Vector2D para_ext_moment = ext_field * gamma;
 
   para_field[0] = (para.pos() - perm[0].pos())*3*para_ext_moment.innerProduct(para.pos() - perm[0].pos()) - para_ext_moment;
   para_field[1] = (para.pos() - perm[1].pos())*3*para_ext_moment.innerProduct(para.pos() - perm[1].pos()) - para_ext_moment;
@@ -223,7 +228,7 @@ double Swimmer::paraDipolePotential() const
   field_on_para[0] = (perm[0].pos() - para.pos())*3*perm[0].moment().dot(perm[0].pos() - para.pos()) - perm[0].moment();
   field_on_para[1] = (perm[1].pos() - para.pos())*3*perm[1].moment().dot(perm[1].pos() - para.pos()) - perm[1].moment();
 
-  Vector2D para_dipole_moment = (field_on_para[0]+field_on_para[1]) * GAMMA/ALPHA;
+  Vector2D para_dipole_moment = (field_on_para[0]+field_on_para[1]) * gamma/alpha;
 
   std::array<Vector2D, 2> para_field;
   para_field[0] = (para.pos() - perm[0].pos())*3*para_dipole_moment.innerProduct(para.pos() - perm[0].pos()) - para_dipole_moment;

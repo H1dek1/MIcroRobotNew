@@ -12,11 +12,12 @@ class ParamagneticParticle{
     Vector2D m_pos;
     Vector2D m_vel;
     Vector2D m_moment;
+    double gamma;
 
   public:
     ParamagneticParticle();
     ~ParamagneticParticle();
-    void reset(Vector2D init_pos);
+    void reset(Vector2D init_pos, double gamma);
 
   public:
     Vector2D pos() const;

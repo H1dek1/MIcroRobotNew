@@ -14,6 +14,7 @@ class PermanentParticle{
     Vector2D m_moment;
     double   m_angle;
     double   m_omega;
+    double beta;
   public:
     double   m_torque;
 
@@ -21,7 +22,7 @@ class PermanentParticle{
   public:
     PermanentParticle();
     ~PermanentParticle();
-    void reset(Vector2D init_pos, double init_angle);
+    void reset(Vector2D init_pos, double init_angle, double beta_);
 
   public:
     Vector2D pos() const;

@@ -14,11 +14,19 @@ class Environment{
     
   public:
     Environment();
+    Environment(
+        bool can_move,
+        bool new_model,
+        double alpha_,
+        double beta_,
+        double gamma_);
+
     ~Environment();
     void reset();
 
   public:
     void run();
+    void run(bool can_move, bool new_model, double alpha, double beta, double gamma);
     void output();
 
   private:
