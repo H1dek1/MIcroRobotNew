@@ -53,14 +53,17 @@ std::tuple<Vector2D, double> Swimmer::getPose() const
 }
 
 
-void Swimmer::update(Vector2D ext_field)
+void Swimmer::update(Vector2D ext_field, bool fixed)
 {
   /* Paramagnetic Moment */
   calcParamagneticMoment( ext_field );
   /* Rotating permanent particles */
   calcCenterVelocity( ext_field );
   /* move all particles */
-  if(move_flag == true) updateParticlesPosition();
+  if(move_flag == true){
+    if(fixed) return;
+    updateParticlesPosition();
+  }
 }
 
 void Swimmer::calcCenterVelocity(Vector2D ext_field)

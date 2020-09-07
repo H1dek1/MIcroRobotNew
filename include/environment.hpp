@@ -27,10 +27,12 @@ class Environment{
   public:
     void run();
     void run(bool can_move, bool new_model, double alpha, double beta, double gamma);
-    void output();
+    void output(int iter);
 
   private:
     std::ofstream fout1;
+    std::ofstream theta1out;
+    std::ofstream zout;
 };
 
 }
