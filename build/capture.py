@@ -21,7 +21,8 @@ def main():
     
     fig, axes = plt.subplots(1, 1, figsize=(6.4, 4.8))
     axes.set_aspect('equal')
-    drawer.drawCapture(data=data, ax=axes, time=0)
+    drawer.draw_swimmer(data=data, ax=axes, time=0)
+    drawer.draw_ext_field(data=data, ax=axes, time=0)
     fig.savefig('sample.png')
 
 

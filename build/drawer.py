@@ -37,7 +37,9 @@ class Drawer:
         self.para_max = np.sqrt(data[:, 7]**2 + data[:, 8]**2).max()
         self.para_u = data[:, 7] / self.para_max * (2*self.a)
         self.para_v = data[:, 8] / self.para_max * (2*self.a)
-    def drawCapture(self, data, ax, time):
+
+
+    def draw_swimmer(self, data, ax, time):
         self.preprocess(data)
         steps = int(time / self.dt)
 
@@ -89,4 +91,22 @@ class Drawer:
                 pivot='mid',
                 width=4.0e-3,
                 zorder=1)
+        ax.plot([self.perm1_x[steps], self.perm2_x[steps]],
+                [self.perm1_y[steps], self.perm2_y[steps]],
+                'k-', lw=5, zorder=2)
+        ax.plot([self.perm2_x[steps], self.para_x[steps]],
+                [self.perm2_y[steps], self.para_y[steps]],
+                'k-', lw=5, zorder=2)
+        ax.plot([self.para_x[steps], self.perm1_x[steps]],
+                [self.para_y[steps], self.perm1_y[steps]],
+                'k-', lw=5, zorder=2)
+
+    def draw_ext_field(self, data, ax, time):
+        steps = int(time / self.dt)
+        ax.quiver(
+                -1, -1,
+                self.ext_x[steps], self.ext_y[steps],
+                color='black',
+                angles='xy', scale_units='xy', scale=2,
+                width=5.0e-3)
 
