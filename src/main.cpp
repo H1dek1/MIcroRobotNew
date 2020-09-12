@@ -5,7 +5,7 @@ int main(int argc, char **argv){
   if(argc != 6){
     std::cout << "Oops! 5 command line args are needed!" << std::endl;
     std::cout << "1(bool): move or not" << std::endl;
-    std::cout << "2(bool): new model or not" << std::endl;
+    std::cout << "2(string): 'new' or 'old' " << std::endl;
     std::cout << "3(double): alpha" << std::endl;
     std::cout << "4(double): beta" << std::endl;
     std::cout << "5(double): gamma" << std::endl;
@@ -29,9 +29,9 @@ int main(int argc, char **argv){
     return 0;
   }
 
-  if(new_flag == "true"){
+  if(new_flag == "new"){
     new_model = true;
-  }else if(new_flag == "false"){
+  }else if(new_flag == "old"){
     new_model = false;
   }else{
     std::cout << "Invalid values" << std::endl;

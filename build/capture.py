@@ -7,22 +7,22 @@ import matplotlib.pyplot as plt
 from drawer import Drawer
 
 def main():
+    draw_times = [0., 20]
     data = np.loadtxt('../result/result.txt', skiprows=2)
-    #params = np.loadtxt('../result/result.txt')
-    params = np.zeros(5)
+    params = np.loadtxt('../result/params.txt', skiprows=1)
     drawer = Drawer(
-            #dt=params[0],
-            dt=1.0e-2,
-            #a=params[1],
-            a=0.3,
+            dt=params[0],
+            a=params[1],
             alpha=params[2],
             beta=params[3],
             gamma=params[4])
     
     fig, axes = plt.subplots(1, 1, figsize=(6.4, 4.8))
     axes.set_aspect('equal')
-    drawer.draw_swimmer(data=data, ax=axes, time=0)
-    drawer.draw_ext_field(data=data, ax=axes, time=0)
+
+    for time in draw_times:
+        drawer.draw_swimmer(data=data, ax=axes, time=time)
+        #drawer.draw_ext_field(data=data, ax=axes, time=0)
     fig.savefig('sample.png')
 
 

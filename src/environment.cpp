@@ -13,6 +13,9 @@ Environment::Environment()
   fout1 << "# ext_x ext_y center_x center_y angle theta1 theta2 moment3_norm moment3_angle ext_potential" << std::endl;
   theta1out.open("../result/theta1out.txt", std::ios::out);
   zout.open("../result/zout.txt", std::ios::out);
+
+  params.open("../result/params.txt", std::ios::out);
+  params << "DT " << "a " << "alpha " << "beta " << "gamma" << std::endl;
 }
 
 void Environment::run(
@@ -22,6 +25,11 @@ void Environment::run(
     double beta,
     double gamma)
 {
+  params << OUT_TIME << " " 
+         << AbyL << " " 
+         << alpha << " " 
+         << beta << " "  
+         << gamma << std::endl;
   swimmer.reset(can_move, new_model, alpha, beta, gamma);
   field.reset();
 
@@ -38,7 +46,7 @@ void Environment::run(
     //std::cout << "dipolepara: " << swimmer.paraDipolePotential() << std::endl;
     //std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
     //std::cout << "--------------------" << std::endl;
-    if(iter%5000 == 0){
+    if(iter%(int(MAX_ITER/5)) == 0){
       auto [pos, angle] = swimmer.getPose();
       std::cout << std::setprecision(5) << iter << "/" << MAX_ITER;
       std::cout << std::scientific << std::setprecision(5) << " " << pos.x << " " << pos.y << " " << angle << " " << std::endl;
@@ -78,6 +86,7 @@ Environment::~Environment()
   fout1.close();
   theta1out.close();
   zout.close();
+  params.close();
 }
 
 }

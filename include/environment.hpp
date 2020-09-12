@@ -33,6 +33,7 @@ class Environment{
     std::ofstream fout1;
     std::ofstream theta1out;
     std::ofstream zout;
+    std::ofstream params;
 };
 
 }
