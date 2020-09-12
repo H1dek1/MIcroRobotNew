@@ -78,7 +78,7 @@ class Drawer:
                 color='black',
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
-                width=4.0e-3,
+                width=1.0e-2,
                 zorder=1)
         ax.quiver(
                 self.perm2_x[steps], self.perm2_y[steps],
@@ -86,7 +86,7 @@ class Drawer:
                 color='black',
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
-                width=4.0e-3,
+                width=1.0e-2,
                 zorder=1)
         ax.quiver(
                 self.para_x[steps], self.para_y[steps],
@@ -94,7 +94,7 @@ class Drawer:
                 color='black',
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
-                width=4.0e-3,
+                width=1.0e-2,
                 zorder=1)
         ax.plot([self.perm1_x[steps], self.perm2_x[steps]],
                 [self.perm1_y[steps], self.perm2_y[steps]],

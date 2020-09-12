@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import numpy as np
 import matplotlib
 import matplotlib.patches as patches
@@ -106,4 +107,6 @@ def properties(
 
 
 if __name__ == '__main__':
+    args = sys.argv
+    print(sys.argv)
     main()
