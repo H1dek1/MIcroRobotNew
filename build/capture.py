@@ -7,8 +7,8 @@ import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from drawer import Drawer
 
-def main():
-    draw_times = [0., 10, 20]
+def main(nums):
+    draw_times = nums
     data = np.loadtxt('../result/result.txt', skiprows=2)
     params = np.loadtxt('../result/params.txt', skiprows=1)
     theta = np.loadtxt('../result/theta1out.txt')
@@ -107,6 +107,5 @@ def properties(
 
 
 if __name__ == '__main__':
-    args = sys.argv
-    print(sys.argv)
-    main()
+    nums = [float(n) for n in sys.argv[1:]]
+    main(nums)
