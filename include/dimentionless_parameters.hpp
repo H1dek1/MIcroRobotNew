@@ -29,7 +29,7 @@ const double OUT_TIME   = 1.0e-2;
 const double OMEGA      = 2.0 * M_PI;
 const int    MAX_ITER   = int(NUM_CYCLES / DT);
 const int    OUT_ITER   = int(OUT_TIME / DT);
-const int    SLEEP_ITER = int(1.0 / DT);
+const int    SLEEP_ITER = int(5.0 / DT);
  
 const double ALPHA   = 1.0e+2;
 const double BETA    = 3.0e-2;
