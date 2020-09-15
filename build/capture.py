@@ -46,22 +46,23 @@ def main(nums):
     """
     ax2
     """
+    ax2.grid()
     xticks = np.arange(0, 2.5, 0.5)
     xticklabels = [str(n) for n in xticks]
     ax2.set_xticks(xticks)
     ax2.set_xticklabels(xticklabels, fontsize=15)
-    ax2.set_yticks([0, np.pi, 2*np.pi, 3*np.pi, 4*np.pi])
-    ax2.set_yticklabels(['0', '$\\pi$', '$2\\pi$', '$3\\pi$', '$4\\pi$'], fontsize=15)
+    ax2.set_yticks([-np.pi, 0, np.pi, 2*np.pi, 3*np.pi, 4*np.pi])
+    ax2.set_yticklabels(['$-\\pi$', '0', '$\\pi$', '$2\\pi$', '$3\\pi$', '$4\\pi$'], fontsize=15)
 
     properties(
             ax=ax2,
             xlabel='$t*$',
             ylabel='$\\theta$',
             xlim=[0, 2.5],
-            ylim=[0, 4.5*np.pi],
+            ylim=[-0.5*np.pi, 4.5*np.pi],
             )
 
-    ax2.plot(theta[:, 0], theta[:, 1])
+    ax2.plot(theta[:, 0], theta[:, 1]-np.pi/2)
 
     """
     ax3
