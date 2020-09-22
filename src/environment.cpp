@@ -9,12 +9,13 @@ namespace MicroRobot
 Environment::Environment()
 {
   fout1.open(FILENAME1, std::ios::out);
-  fout1 << "OUT_TIME " << OUT_TIME << std::endl;
-  fout1 << "# ext_x ext_y center_x center_y angle theta1 theta2 moment3_norm moment3_angle ext_potential" << std::endl;
   theta1out.open("../result/theta1out.txt", std::ios::out);
   zout.open("../result/zout.txt", std::ios::out);
-
   params.open("../result/params.txt", std::ios::out);
+  phases.open("../result/phases.txt", std::ios::app);
+
+  fout1 << "OUT_TIME " << OUT_TIME << std::endl;
+  fout1 << "# ext_x ext_y center_x center_y angle theta1 theta2 moment3_norm moment3_angle ext_potential" << std::endl;
   params << "DT " << "a " << "alpha " << "beta " << "gamma" << std::endl;
 }
 
@@ -53,6 +54,16 @@ void Environment::run(
 
     }
     if(iter%OUT_ITER == 0) output(iter);
+    if(iter == MAX_ITER){
+      phases << alpha << " "
+             << beta << " "
+             << gamma << " "
+             << MAX_ITER << " "
+             << swimmer.pos().x << " "
+             << swimmer.pos().y << " "
+             << std::endl;
+
+    }
     
     swimmer.update( field.moment(), false);
     field.update( iter * DT );
@@ -87,6 +98,7 @@ Environment::~Environment()
   theta1out.close();
   zout.close();
   params.close();
+  phases.close();
 }
 
 }

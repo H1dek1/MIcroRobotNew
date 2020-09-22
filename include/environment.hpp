@@ -34,6 +34,7 @@ class Environment{
     std::ofstream theta1out;
     std::ofstream zout;
     std::ofstream params;
+    std::ofstream phases;
 };
 
 }
