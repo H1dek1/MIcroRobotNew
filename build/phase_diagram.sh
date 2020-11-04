@@ -1,6 +1,6 @@
 #!/bin/bash
 
-gamma=0.1
+gamma=0.01
 
 alpha_arr=( \
 1e-1 2e-1 5e-1 \
@@ -13,6 +13,7 @@ alpha_arr=( \
 )
 
 beta_arr=( \
+1e-5 2e-5 5e-5 \
 1e-4 2e-4 5e-4 \
 1e-3 2e-3 5e-3 \
 1e-2 2e-2 5e-2 \
