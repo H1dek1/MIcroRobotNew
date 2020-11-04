@@ -39,6 +39,11 @@ void Environment::run(
     swimmer.update( field.moment(), true);
   }
 
+  //std::cout << NUM_CYCLES << std::endl;
+  //std::cout << DT << std::endl;
+  //std::cout << NUM_CYCLES / DT << std::endl;
+  //std::cout << (int)(NUM_CYCLES / DT) << std::endl;
+  //std::cout << MAX_ITER << std::endl;
   for(int iter = 0; iter < MAX_ITER+1; iter++){
   //for(int iter = 0; iter < 10; iter++){
     //std::cout << "ext: " << swimmer.extPotential( field.moment() ) << std::endl;
@@ -47,9 +52,10 @@ void Environment::run(
     //std::cout << "dipolepara: " << swimmer.paraDipolePotential() << std::endl;
     //std::cout << "all: " << swimmer.allPotential( field.moment() ) << std::endl;
     //std::cout << "--------------------" << std::endl;
-    if(iter%(int(MAX_ITER/5)) == 0){
+    if(iter == MAX_ITER){
+    //if(iter%(int(MAX_ITER/5)) == 0){
       auto [pos, angle] = swimmer.getPose();
-      std::cout << std::setprecision(5) << iter << "/" << MAX_ITER;
+      std::cout << std::setprecision(4) << iter << "/" << MAX_ITER;
       std::cout << std::scientific << std::setprecision(5) << " " << pos.x << " " << pos.y << " " << angle << " " << std::endl;
 
     }

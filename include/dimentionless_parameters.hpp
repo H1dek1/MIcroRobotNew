@@ -24,7 +24,7 @@ const bool   MOVE      = true;
 const bool   NEW_MODEL = true;
 
 const int    NUM_CYCLES = 20;
-const double DT         = 1.0e-4;
+const double DT         = 1.0e-6;
 const double OUT_TIME   = 1.0e-2;
 const double OMEGA      = 2.0 * M_PI;
 const int    MAX_ITER   = int(NUM_CYCLES / DT);
@@ -36,11 +36,11 @@ const double BETA    = 3.0e-2;
 const double GAMMA   = 1.0e+1;
 const double AbyL    = 0.3;
 const double AbyL3   = AbyL * AbyL * AbyL;
-
 const double HIGHT        = sqrt(3.0)/2.0;
+
+const double ROBOT_ANGLE  = 0; // 0-> y-axis
 const double INIT_ANGLE_1 = 0;
 const double INIT_ANGLE_2 = 0;
-const double ROBOT_ANGLE  = 0;
 
 const double FIELD_ANGLE  = 0;
 
