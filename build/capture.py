@@ -34,6 +34,9 @@ def main(nums):
     """
     ax1
     """
+    ax1.text(-1.0, 4.9, 'A', fontsize=30, horizontalalignment='center')
+    ax2.text(-0.1, 17, 'B', fontsize=30, horizontalalignment='center')
+    ax3.text(-0.1, 0.52, 'C', fontsize=30, horizontalalignment='center')
     properties(
             ax=ax1,
             equal_aspect=True,

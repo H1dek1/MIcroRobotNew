@@ -42,11 +42,11 @@ class Drawer:
     def draw_swimmer(self, data, ax, time):
         self.preprocess(data)
         steps = int(time / self.dt)
-        ax.text(self.center_x[steps]-0.4, self.para_y[steps], 
+        ax.text(self.center_x[steps]-0.1, self.para_y[steps]+0.4, 
                 '$t*={}$'.format(time),
                 horizontalalignment='right',
                 verticalalignment='center',
-                fontsize=10)
+                fontsize=15)
 
         perm1 = patches.Circle(
                 xy=(self.perm1_x[steps], self.perm1_y[steps]),
