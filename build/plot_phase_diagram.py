@@ -19,7 +19,8 @@ ax.set_yscale('log')
 #ax.set_ylim(0, 200)
 cm = plt.cm.get_cmap('Blues')
 #-------------------
-data = np.loadtxt('../phases/phases_gamma0.01_mt.txt')
+#data = np.loadtxt('../phases/phases_gamma0.01.txt')
+data = np.loadtxt('../phases/phases_mntau_gamma0.01.txt')
 alpha = data[:,0]
 beta = data[:,1]
 gamma = data[:,2]
@@ -44,6 +45,6 @@ print(max(pos_y))
 mappable = ax.scatter(mn, trf, c=pos_y, vmin=min(pos_y)-0.2, vmax=max(pos_y)+0.2, s=35, cmap=cm)
 fig.colorbar(mappable, ax=ax)
 plt.subplots_adjust(left=0.12, right=1.0, bottom=0.1, top=0.9)
-fig.savefig('../phases/phase_gamma0.01_mt.eps')
-fig.savefig('../phases/phase_gamma0.01_mt.png')
+fig.savefig('../phases/phase_mntau_gamma0.01_mt.eps')
+fig.savefig('../phases/phase_mntau_gamma0.01_mt.png')
 plt.show()
