@@ -25,12 +25,18 @@ def main(nums):
             gamma=params[4])
     
     #fig = plt.figure(tight_layout=True)
-    fig = plt.figure(figsize=(10, 8), tight_layout=True)
+    fig = plt.figure(figsize=(12, 8), tight_layout=True)
     fig.subplots_adjust(hspace=0.3, wspace=0.6)
-    gs = fig.add_gridspec(2, 3)
-    ax1 = fig.add_subplot(gs[:, 0])
-    ax2 = fig.add_subplot(gs[0, 1:3])
-    ax3 = fig.add_subplot(gs[1, 1:3])
+    gs = fig.add_gridspec(2, 12)
+    ax0 = fig.add_subplot(gs[:, 0:4])
+    ax1 = fig.add_subplot(gs[:, 4:8])
+    ax2 = fig.add_subplot(gs[0, 8:12])
+    ax3 = fig.add_subplot(gs[1, 8:12])
+
+    #ax0 = fig.add_subplot(1, 4, 1)
+    #ax1 = fig.add_subplot(1, 4, 2)
+    #ax2 = fig.add_subplot(2, 2, 2)
+    #ax3 = fig.add_subplot(2, 2, 4)
     """
     ax1
     """
@@ -80,7 +86,7 @@ def main(nums):
     properties(
             ax=ax3,
             xlabel='$t*$',
-            ylabel='$y$',
+            ylabel='$y/l$',
             xlim=[0, 2.5],
             ylim=[0, 0.5],
             )
