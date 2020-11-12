@@ -28,7 +28,7 @@ def main(nums):
     fig = plt.figure(figsize=(12, 8), tight_layout=True)
     fig.subplots_adjust(hspace=0.3, wspace=0.6)
     gs = fig.add_gridspec(2, 12)
-    ax0 = fig.add_subplot(gs[:, 0:4])
+    ax0 = fig.add_subplot(gs[0, 0:4])
     ax1 = fig.add_subplot(gs[:, 4:8])
     ax2 = fig.add_subplot(gs[0, 8:12])
     ax3 = fig.add_subplot(gs[1, 8:12])
@@ -37,6 +37,81 @@ def main(nums):
     #ax1 = fig.add_subplot(1, 4, 2)
     #ax2 = fig.add_subplot(2, 2, 2)
     #ax3 = fig.add_subplot(2, 2, 4)
+    """
+    ax0
+    """
+    # visual set
+    ax0.set_xlim([-1, 1])
+    ax0.set_ylim([-0.6, 1.2])
+    ax0.set_aspect('equal')
+    ax0.axis('off')
+    
+    #drawing
+    pos_1 = [-0.5, 0]
+    pos_2 = [0.5, 0]
+    pos_3 = [0, np.sqrt(3)/2]
+    ##particle
+    perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=0.3, fc='gray')
+    perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=0.3, fc='gray')
+    para = patches.Circle(xy=(pos_3[0], pos_3[1]), radius=0.3, fc='orange')
+    ax0.add_patch(perm1)
+    ax0.add_patch(perm2)
+    ax0.add_patch(para)
+    ##vectors
+    ax0.quiver(pos_1[0], pos_1[1], 0.25*np.cos(3*np.pi/4), 0.25*np.sin(3*np.pi/4), pivot='mid', scale=1, width=2.0e-2, headwidth=3, headlength=4, headaxislength=3, color='black', zorder=2)
+    ax0.quiver(pos_2[0], pos_2[1], 0.25*np.cos(np.pi/4), 0.25*np.sin(np.pi/4), pivot='mid', scale=1, width=2.0e-2, headwidth=3, headlength=4, headaxislength=3, color='black', zorder=2)
+    
+    ##frames
+    ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=5, zorder=3)
+    ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=5, zorder=3)
+    ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=5, zorder=3)
+    
+    ##measures
+    R = 0.4
+    init = 1*np.pi/5
+    fini = 4*np.pi/5
+    arrow_dict1 = dict(arrowstyle = '->, head_width=0.3, head_length=0.4', connectionstyle='arc3, rad=0.5', color='k')
+    arrow_dict2 = dict(arrowstyle = '->, head_width=0.3, head_length=0.4', connectionstyle='arc3, rad=-0.5', color='k')
+    ax0.annotate('',
+            xy=(pos_1[0] + R*np.cos(np.pi/2+fini), pos_1[1] + R*np.sin(np.pi/2+fini)),
+            xytext=(pos_1[0] + R*np.cos(np.pi/2+init), pos_1[1] + R*np.sin(np.pi/2+init)),
+            arrowprops=arrow_dict1,
+            color='k',
+            zorder=4)
+    ax0.annotate('',
+            xy=(pos_2[0] + R*np.cos(np.pi/2-fini), pos_2[1] + R*np.sin(np.pi/2-fini)),
+            xytext=(pos_2[0] + R*np.cos(np.pi/2-init), pos_1[1] + R*np.sin(np.pi/2-init)),
+            arrowprops=arrow_dict2,
+            color='k',
+            zorder=4)
+    #ax.plot([0, 0], [0, np.sqrt(3)/2], ls='dashed', color='k', lw=1, zorder=4)
+    
+    ax0.plot([-0.5, -0.5], [0, -0.55], linestyle='--', color='k', lw=1, zorder=5)
+    ax0.plot([0.5, 0.5], [0, -0.55], linestyle='--', color='k', lw=1, zorder=5)
+    ax0.plot([0.2, 0.2], [0, -0.45], linestyle='--', color='k', lw=1, zorder=5)
+    arrow_dict3 = dict(arrowstyle = '<->, head_width=0.2, head_length=0.4', connectionstyle='arc3', color='k', shrinkA=0, shrinkB=0, linestyle='--')
+    
+    
+    ax0.annotate('',
+            xy=(-0.5, -0.5),
+            xytext=(0.5, -0.5),
+            arrowprops=arrow_dict3,
+            color='k',
+            zorder=4)
+    ax0.text(0, -0.5, '$l$', fontsize=25, horizontalalignment='center', verticalalignment='bottom')
+    ax0.annotate('',
+            xy=(0.2, -0.4),
+            xytext=(0.5, -0.4),
+            arrowprops=arrow_dict3,
+            color='k',
+            zorder=4)
+    ax0.text(0.35, -0.4, '$a$', fontsize=25, horizontalalignment='center', verticalalignment='bottom')
+    
+
+
+
+
+
     """
     ax1
     """
