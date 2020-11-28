@@ -38,14 +38,8 @@ int main(int argc, char **argv){
     return 0;
   }
 
-  double mn  = atof(argv[3]);
-  double trf = atof(argv[4]);
-  alpha = mn / trf;
-  beta  = MicroRobot::AbyL3 / mn;
-  
-  //alpha = atof(argv[3]);
-  //beta  = atof(argv[4]);
-
+  alpha = atof(argv[3]);
+  beta  = atof(argv[4]);
   gamma = atof(argv[5]);
 
   MicroRobot::Environment env;
