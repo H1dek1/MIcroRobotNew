@@ -9,11 +9,12 @@ namespace MicroRobot
 class ExternalMagneticField{
   private:
     Vector2D m_moment;
+    double angle;
 
   public:
     ExternalMagneticField();
     ~ExternalMagneticField();
-    void reset();
+    void reset(double field_angle);
 
   public:
     void update(double time);

@@ -24,7 +24,8 @@ void Environment::run(
     bool new_model,
     double alpha,
     double beta,
-    double gamma)
+    double gamma,
+    double angle)
 {
   params << OUT_TIME << " " 
          << AbyL << " " 
@@ -32,7 +33,7 @@ void Environment::run(
          << beta << " "  
          << gamma << std::endl;
   swimmer.reset(can_move, new_model, alpha, beta, gamma);
-  field.reset();
+  field.reset(angle);
 
   /* aligning moments */
   for(int iter = 0; iter < SLEEP_ITER; iter++){
@@ -67,6 +68,7 @@ void Environment::run(
              << MAX_ITER << " "
              << swimmer.pos().x << " "
              << swimmer.pos().y << " "
+             << angle << " "
              << std::endl;
 
     }

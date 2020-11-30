@@ -10,9 +10,10 @@ ExternalMagneticField::ExternalMagneticField()
 {
 }
 
-void ExternalMagneticField::reset()
+void ExternalMagneticField::reset(double field_angle)
 {
-  m_moment.setPolar(1.0, FIELD_ANGLE+(M_PI/2));
+  angle = field_angle * (M_PI/90);
+  m_moment.setPolar(1.0, angle+(M_PI/2));
 }
 
 Vector2D ExternalMagneticField::moment() const
@@ -23,7 +24,7 @@ Vector2D ExternalMagneticField::moment() const
 void ExternalMagneticField::update(double time)
 {
   double norm = cos(OMEGA * time);
-  m_moment.setPolar(norm, FIELD_ANGLE+(M_PI/2));
+  m_moment.setPolar(norm, angle+(M_PI/2));
 }
 
 ExternalMagneticField::~ExternalMagneticField()

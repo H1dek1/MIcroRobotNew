@@ -26,7 +26,7 @@ class Environment{
 
   public:
     void run();
-    void run(bool can_move, bool new_model, double alpha, double beta, double gamma);
+    void run(bool can_move, bool new_model, double alpha, double beta, double gamma, double angle);
     void output(int iter);
 
   private:

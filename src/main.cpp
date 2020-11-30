@@ -2,13 +2,14 @@
 
 int main(int argc, char **argv){
 
-  if(argc != 6){
+  if(argc != 7){
     std::cout << "Oops! 5 command line args are needed!" << std::endl;
     std::cout << "1(bool): move or not" << std::endl;
     std::cout << "2(string): 'new' or 'old' " << std::endl;
     std::cout << "3(double): alpha" << std::endl;
     std::cout << "4(double): beta" << std::endl;
     std::cout << "5(double): gamma" << std::endl;
+    std::cout << "6(double): magnetic field angle" << std::endl;
     return 0;
   }
 
@@ -17,6 +18,7 @@ int main(int argc, char **argv){
   double alpha;
   double beta;
   double gamma;
+  double angle;
 
   std::string move_flag = argv[1];
   std::string new_flag  = argv[2];
@@ -41,8 +43,9 @@ int main(int argc, char **argv){
   alpha = atof(argv[3]);
   beta  = atof(argv[4]);
   gamma = atof(argv[5]);
+  angle = atof(argv[6]);
 
   MicroRobot::Environment env;
-  env.run(can_move, new_model, alpha, beta, gamma);
+  env.run(can_move, new_model, alpha, beta, gamma, angle);
   return 0;
 }
