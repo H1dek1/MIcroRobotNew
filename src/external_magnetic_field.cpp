@@ -12,7 +12,7 @@ ExternalMagneticField::ExternalMagneticField()
 
 void ExternalMagneticField::reset(double field_angle)
 {
-  angle = field_angle * (M_PI/90);
+  angle = field_angle * (M_PI/180);
   m_moment.setPolar(1.0, angle+(M_PI/2));
 }
 
