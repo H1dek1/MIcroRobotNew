@@ -46,7 +46,7 @@ class Drawer:
                 '$t*={}$'.format(time),
                 horizontalalignment='right',
                 verticalalignment='center',
-                fontsize=15)
+                fontsize=25)
 
         perm1 = patches.Circle(
                 xy=(self.perm1_x[steps], self.perm1_y[steps]),
