@@ -34,7 +34,7 @@ const int    SLEEP_ITER = int(5.0 / DT);
 const double ALPHA   = 1.0e+2;
 const double BETA    = 3.0e-2;
 const double GAMMA   = 1.0e+1;
-const double AbyL    = 0.3;
+const double AbyL    = 0.4;
 const double AbyL3   = AbyL * AbyL * AbyL;
 const double HIGHT        = sqrt(3.0)/2.0;
 
