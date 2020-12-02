@@ -10,6 +10,8 @@ from drawer import Drawer
 plt.rcParams['font.family'] = 'Times New Roman'
 plt.rcParams['mathtext.fontset'] = 'stix'
 plt.rcParams['font.size'] = 25
+plt.rcParams['xtick.direction'] = 'in'
+plt.rcParams['ytick.direction'] = 'in'
 
 def main(nums):
     draw_times = nums
@@ -29,7 +31,7 @@ def main(nums):
     fig.subplots_adjust(hspace=0.4, wspace=0.0)
     gs = fig.add_gridspec(6, 13)
     ax0 = fig.add_subplot(gs[0:4, 0:4])
-    ax01 = fig.add_subplot(gs[2:6, 0:4])
+    ax01 = fig.add_subplot(gs[3:6, 0:4])
     ax1 = fig.add_subplot(gs[:, 4:7])
     ax2 = fig.add_subplot(gs[0:3, 7:13])
     ax3 = fig.add_subplot(gs[3:6, 7:13])
@@ -38,7 +40,74 @@ def main(nums):
     #ax1 = fig.add_subplot(1, 4, 2)
     #ax2 = fig.add_subplot(2, 2, 2)
     #ax3 = fig.add_subplot(2, 2, 4)
+    """
+    ax01
+    """
+    LX = 2
+    LY = 1.5
+    gridwidth = 0.1
+    ratio = 1.2
+    ax01.set_xlabel(r'$x/l$')
+    ax01.set_ylabel(r'$y/l$')
+    ax01.set_xlim([-LX, LX])
+    ax01.set_ylim([-LY, LY])
+    ax01.set_aspect('equal')
     #ax01.axis('off')
+    pos_1 = [ratio * -0.5, 0]
+    pos_2 = [ratio * 0.5, 0]
+    perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, ls='--', ec='gray', fill=False)
+    perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=ratio * 0.3, ls='--', ec='gray', fill=False)
+    ax01.add_patch(perm1)
+    ax01.add_patch(perm2)
+    x_arr = np.arange(-LX, LX, gridwidth)
+    y_arr = np.arange(-LY, LY, gridwidth)
+    X, Y = np.meshgrid(x_arr, y_arr)
+    U = np.zeros((len(y_arr), len(x_arr)))
+    V = np.zeros((len(y_arr), len(x_arr)))
+    for i in range(len(y_arr)):
+        for j in range(len(x_arr)):
+            R1_x = X[i][j] - pos_1[0]
+            R1_y = Y[i][j] - pos_1[1]
+            R2_x = X[i][j] - pos_2[0]
+            R2_y = Y[i][j] - pos_2[1]
+            R1 = np.sqrt(R1_x**2 + R1_y**2)
+            R2 = np.sqrt(R2_x**2 + R2_y**2)
+            T_1 =  0.05
+            T_2 = -0.05
+            U[i][j] = 0.0
+            V[i][j] = 0.0
+            if R1 > 0.3*ratio:
+                U[i][j] += -R1_y / (R1**3) * T_1
+                V[i][j] +=  R1_x / (R1**3) * T_1
+
+            if R2 > 0.3*ratio:
+                U[i][j] += -R2_y / (R2**3) * T_2
+                V[i][j] +=  R2_x / (R2**3) * T_2
+            U[i][j] *= ratio
+            V[i][j] *= ratio
+
+    #for x in x_arr:
+    #    u = []
+    #    v = []
+    #    for y in y_arr:
+    #        R1_x = X - pos_1[0]
+    #        R1_y = Y - pos_1[1]
+    #        R2_x = X - pos_2[0]
+    #        R2_y = Y - pos_2[1]
+    #        R1 = np.sqrt(R1_x**2 + R1_y**2)
+    #        R2 = np.sqrt(R2_x**2 + R2_y**2)
+    #        T_1 =  0.05
+    #        T_2 = -0.05
+    #        u_x = -R1_y / (R1**3) * T_1 + (-R2_y / (R2**3) * T_2)
+    #        u_y =  R1_x / (R1**3) * T_1 + ( R2_x / (R2**3) * T_2)
+    #        u.append(u_x)
+    #        v.append(u_y)
+
+    #    U.append(u)
+    #    V.append(v)
+
+    ax01.quiver(X, Y, U, V, color='C0', angles='xy', scale_units='xy', scale=1.0)
+
     """
     ax0
     """
@@ -118,10 +187,11 @@ def main(nums):
     """
     ax1
     """
-    ax0.text(-2.0, 2.8, 'A', fontsize=30, horizontalalignment='center')
-    ax1.text(-1.0, 4.9, 'A', fontsize=30, horizontalalignment='center')
-    ax2.text(-0.1, 17, 'B', fontsize=30, horizontalalignment='center')
-    ax3.text(-0.1, 0.52, 'C', fontsize=30, horizontalalignment='center')
+    ax0.text(-2.0, 2.8, '(a)', fontsize=30, horizontalalignment='center')
+    ax01.text(-LX, LY, '(b)')
+    ax1.text(-1.2, 4.6, '(c)', fontsize=30, horizontalalignment='center')
+    ax2.text(-0.1, 17, '(d)', fontsize=30, horizontalalignment='center')
+    ax3.text(-0.1, 0.52, '(e)', fontsize=30, horizontalalignment='center')
     properties(
             ax=ax1,
             equal_aspect=True,
