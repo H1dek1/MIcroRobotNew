@@ -43,10 +43,10 @@ def main(nums):
     """
     ax01
     """
-    LX = 2
-    LY = 1.5
+    LX = 1.5
+    LY = 1.0
     gridwidth = 0.1
-    ratio = 1.2
+    ratio = 1.0
     ax01.set_xlabel(r'$x/l$')
     ax01.set_ylabel(r'$y/l$')
     ax01.set_xlim([-LX, LX])
@@ -55,8 +55,8 @@ def main(nums):
     #ax01.axis('off')
     pos_1 = [ratio * -0.5, 0]
     pos_2 = [ratio * 0.5, 0]
-    perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, ls='--', ec='gray', fill=False)
-    perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=ratio * 0.3, ls='--', ec='gray', fill=False)
+    perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, ls='-', ec='gray', fc='gray', fill=True)
+    perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=ratio * 0.3, ls='-', ec='gray', fc='gray', fill=True)
     ax01.add_patch(perm1)
     ax01.add_patch(perm2)
     x_arr = np.arange(-LX, LX, gridwidth)
@@ -72,8 +72,8 @@ def main(nums):
             R2_y = Y[i][j] - pos_2[1]
             R1 = np.sqrt(R1_x**2 + R1_y**2)
             R2 = np.sqrt(R2_x**2 + R2_y**2)
-            T_1 =  0.05
-            T_2 = -0.05
+            T_1 =  0.03
+            T_2 = -0.03
             U[i][j] = 0.0
             V[i][j] = 0.0
             if R1 > 0.3*ratio:
@@ -86,27 +86,10 @@ def main(nums):
             U[i][j] *= ratio
             V[i][j] *= ratio
 
-    #for x in x_arr:
-    #    u = []
-    #    v = []
-    #    for y in y_arr:
-    #        R1_x = X - pos_1[0]
-    #        R1_y = Y - pos_1[1]
-    #        R2_x = X - pos_2[0]
-    #        R2_y = Y - pos_2[1]
-    #        R1 = np.sqrt(R1_x**2 + R1_y**2)
-    #        R2 = np.sqrt(R2_x**2 + R2_y**2)
-    #        T_1 =  0.05
-    #        T_2 = -0.05
-    #        u_x = -R1_y / (R1**3) * T_1 + (-R2_y / (R2**3) * T_2)
-    #        u_y =  R1_x / (R1**3) * T_1 + ( R2_x / (R2**3) * T_2)
-    #        u.append(u_x)
-    #        v.append(u_y)
-
-    #    U.append(u)
-    #    V.append(v)
 
     ax01.quiver(X, Y, U, V, color='C0', angles='xy', scale_units='xy', scale=1.0)
+    ax01.quiver(pos_1[0], pos_1[1], 0., 0.8, color='red', angles='xy', scale_units='xy', scale=1.0, zorder=2)
+    ax01.quiver(pos_2[0], pos_2[1], 0., 0.8, color='red', angles='xy', scale_units='xy', scale=1.0, zorder=2)
 
     """
     ax0
@@ -187,11 +170,11 @@ def main(nums):
     """
     ax1
     """
-    ax0.text(-2.0, 2.8, '(a)', fontsize=30, horizontalalignment='center')
-    ax01.text(-LX, LY, '(b)')
-    ax1.text(-1.2, 4.6, '(c)', fontsize=30, horizontalalignment='center')
-    ax2.text(-0.1, 17, '(d)', fontsize=30, horizontalalignment='center')
-    ax3.text(-0.1, 0.52, '(e)', fontsize=30, horizontalalignment='center')
+    #ax0.text(-2.0, 2.8, '(a)', fontsize=30, horizontalalignment='center')
+    #ax01.text(-LX, LY+0.0, '(b)')
+    #ax1.text(-1.2, 4.6, '(c)', fontsize=30, horizontalalignment='center')
+    ax2.text(-0.1, 17, '(d)', fontsize=30, horizontalalignment='center', color='white')
+    ax3.text(-0.1, 0.53, '(e)', fontsize=30, horizontalalignment='center', color='white')
     properties(
             ax=ax1,
             equal_aspect=True,
@@ -237,7 +220,7 @@ def main(nums):
             xlabel='$t*$',
             ylabel='$y/l$',
             xlim=[0, 2.5],
-            ylim=[0, 0.5],
+            ylim=[-0.05, 0.5],
             )
     ax3.plot(traj[:, 0], traj[:, 1])
     fig.savefig('sample_fig.png')
