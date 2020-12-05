@@ -66,7 +66,7 @@ def main(start):
     theta1_rel =   theta_1 - center_angle - np.pi/2
     theta2_rel = -(theta_2 - center_angle - np.pi/2)
     
-    fig = plt.figure(figsize=(7.0, 8), tight_layout=True)
+    fig = plt.figure(figsize=(7.0, 7), tight_layout=False)
     ax1 = fig.add_subplot(1, 1, 1)
 
 #    def ext_potential_surface(theta1, theta2, field_x, field_y):
@@ -175,6 +175,7 @@ def main(start):
         #Y = all_potential_surface((X1+center_angle[0]+np.pi/2), (-X2+center_angle[0]+np.pi/2), center_angle[0], ext_x[i], ext_y[i])
 
     
+    #ani = animation.FuncAnimation(fig, update, init_func=init, interval=(DT*2)*1.0e+3, frames=ext_x.size)
     ani = animation.FuncAnimation(fig, update, init_func=init, interval=(DT*2)*1.0e+3, frames=ext_x.size)
     print('Drawing ...')
     ani.save('../aaa.mp4', writer='ffmpeg')
