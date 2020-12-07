@@ -16,8 +16,8 @@ plt.rcParams['font.size'] = 20
 
 min_X = -2
 max_X =  1.5
-min_Y = -1
-max_Y =  3
+min_Y = -2
+max_Y =  2
 ALPHA = 1.0e+2
 
 def main(start):
