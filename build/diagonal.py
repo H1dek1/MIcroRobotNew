@@ -17,8 +17,8 @@ def main():
 
     fig, ax = plt.subplots(2, 2, figsize=(12, 9))
     for i in range(2):
-        ax[i, 0].set_xlabel(r'$\phi^{ext}$', fontsize=25)
-        ax[i, 0].set_ylabel(r'$\phi^C$', fontsize=25)
+        ax[i, 0].set_xlabel(r'$\phi_B$', fontsize=25)
+        ax[i, 0].set_ylabel(r'$\phi_S$', fontsize=25)
         ax[i, 0].set_ylim(-np.pi-0.7, np.pi/2+0.7)
         ax[i, 0].set_xticks([0, np.pi/2, np.pi])
         ax[i, 0].set_xticklabels([r'$0$', r'$\pi/2$', r'$\pi$'], fontsize=20)
@@ -35,7 +35,7 @@ def main():
         ax[i, 1].set_aspect('equal')
     #ax[1].quiver(np.zeros(len(ext_angle)), np.zeros(len(ext_angle)), pos_x/length, pos_y/length, angles='xy', scale_units='xy', scale=1)
     step = len(ext_angle)
-    n = 100
+    n = 50
     step /= n
     print(len(pos_x[::int(step)]))
     ax[0, 0].plot(ext_angle, swimmer_angle-np.pi/2, marker='.', color='C0')
