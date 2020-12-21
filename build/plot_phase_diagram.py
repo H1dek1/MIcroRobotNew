@@ -312,17 +312,36 @@ axes[1].set_xlabel(r'$\alpha$', fontsize=25)
 axes[1].set_ylabel(r'$\beta$', fontsize=25)
 axes[1].set_xscale('log')
 axes[1].set_yscale('log')
-axes[1].set_xticks([0.1, 1, 10, 100, 1000])
-axes[1].set_xticklabels([r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$', r'$10^{2}$', r'$10^{3}$'], fontsize=20)
-axes[1].set_yticks([1e-4, 1e-3, 1e-2, 1e-1, 1])
-axes[1].set_yticklabels([r'$10^{-4}$', r'$10^{-3}$', r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$'], fontsize=20)
-#ax.set_xlim(0, 0.5)
-#ax.set_ylim(0, 200)
+axes[1].set_xticks([0.1, 1, 10])
+axes[1].set_xticklabels([r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$'], fontsize=20)
+axes[1].set_yticks([0.1, 1, 10])
+axes[1].set_yticklabels([r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$'], fontsize=20)
+#axes[1].set_xticks([0.1, 1, 10, 100, 1000])
+#axes[1].set_xticklabels([r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$', r'$10^{2}$', r'$10^{3}$'], fontsize=20)
+#axes[1].set_yticks([1e-4, 1e-3, 1e-2, 1e-1, 1])
+#axes[1].set_yticklabels([r'$10^{-4}$', r'$10^{-3}$', r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$'], fontsize=20)
+#axes[1].set_xlim(0.5, 20)
+#axes[1].set_ylim(0.5, 20)
+#axes[1].set_aspect('equal')
 #cm = plt.cm.get_cmap('Blues')
 #cm = plt.cm.get_cmap('cividis')
 cm = parula_map
+
+delta = 0.01
+a = np.arange(0, 1, delta)
+g = np.arange(0, 1, delta)
+A, G = np.meshgrid(a, g)
+X = 4*A + 5*G
+Y = 3*np.sqrt(3)*G
+
+Z = X**6 + 3 * X**4 * Y**2 - 16 * X**2 * Y**2 + 3 * X**2 * Y**4 + Y**6
+Z2 = np.sqrt( (4*A + 5*G)**2 + (3*np.sqrt(3)*G)**2 ) - 2
+#axes[1].contour(A, G, Z, [0], colors=['b'])
+#axes[1].contour(A, G, Z2, [0], colors=['r'])
+
 #-------------------
-data = np.loadtxt('../phases/phases_g1e-7.txt')
+#data = np.loadtxt('../phases/phases_g1e-7.txt')
+data = np.loadtxt('../result/phases.txt')
 alpha = data[:,0]
 beta = data[:,1]
 gamma = data[:,2]
@@ -334,7 +353,7 @@ print(min(pos_y))
 print(max(pos_y))
 #-------------------
 #mappable = ax.scatter(alpha, beta, c=pos_y, vmin=min(pos_y)-0.2, vmax=max(pos_y)+0.2, s=35, cmap=cm)
-mappable1 = axes[1].scatter(alpha, beta, c=pos_y, vmin=min(pos_y), vmax=max(pos_y), s=35, cmap=cm)
+mappable1 = axes[1].scatter(alpha, gamma, c=pos_y, vmin=min(pos_y), vmax=max(pos_y), s=35, cmap=cm)
 #fig.colorbar(mappable0, ax=axes[0], ticks=[0.0, 0.5, 1.0, 1.5])
 #fig.colorbar(mappable1, ax=axes[1], ticks=[0.0, 0.5, 1.0, 1.5])
 divider = make_axes_locatable(axes[1])
