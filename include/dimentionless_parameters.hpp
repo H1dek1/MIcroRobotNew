@@ -23,8 +23,8 @@ const std::string FILENAME2 = "../result/potential.txt";
 const bool   MOVE      = true;
 const bool   NEW_MODEL = true;
 
-const int    NUM_CYCLES = 10;
-const double DT         = 1.0e-5;
+const int    NUM_CYCLES = 2;
+const double DT         = 1.0e-7;
 const double OUT_TIME   = 1.0e-2;
 const double OMEGA      = 2.0 * M_PI;
 const int    MAX_ITER   = int(NUM_CYCLES / DT);

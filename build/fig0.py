@@ -10,9 +10,8 @@ plt.rcParams['font.size'] = 25
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 plt.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
-plt.rcParams['text.latex.preamble']=[r"\usepackage{bm}"]
 
-fig = plt.figure(figsize=(20, 12), tight_layout=True)
+fig = plt.figure(figsize=(15, 9), tight_layout=True)
 #fig.subplots_adjust(hspace=0.4, wspace=0.0)
 gs = fig.add_gridspec(2, 2)
 ax1 = fig.add_subplot(gs[0, 0])
@@ -27,6 +26,8 @@ ax0
 ratio = 1.0
 ax0.set_xlim([-2.5, 4.5])
 ax0.set_ylim([-0.7, 2.5])
+ax0.set_xlabel(r'$x/l$')
+ax0.set_ylabel(r'$y/l$')
 ax0.set_aspect('equal')
 #ax0.axis('off')
 
@@ -137,7 +138,7 @@ ax0.text(center[0]+1.9*np.cos(direct/2), center[1]+1.9*np.sin(direct/2), r'$\phi
 """
 ax1
 """
-LX = 1.5
+LX = 2.0
 LY = 1.0
 gridwidth = 0.1
 ratio = 1.0
@@ -147,6 +148,7 @@ ax1.set_xlim([-LX, LX])
 ax1.set_ylim([-LY, LY])
 ax1.set_aspect('equal')
 #ax1.axis('off')
+ax1.set_yticks([-1, 0, 1])
 pos_1 = [ratio * -0.5, 0]
 pos_2 = [ratio * 0.5, 0]
 perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, ls='-', ec='gray', fc='gray', fill=True)
@@ -198,9 +200,35 @@ ax3
 """
 width = 682
 height = 386
-ax3.set_xlim(-250, width+250)
-ax3.set_ylim(height+120, -200)
+origin_x = width/2
+origin_y = height/2
+ax3.set_xlim(origin_x-400, origin_x+400)
+ax3.set_ylim(origin_y+300, origin_y-300)
 ax3.set_aspect('equal')
 img3 = plt.imread('chlamidomonas.png')
-ax3.imshow(img3)
+ax3.imshow(img3, zorder=0)
+ax3.axis('off')
+
+center_x = origin_x
+center_y = origin_y + 70
+body = patches.Circle(xy=(center_x, center_y), radius=40, fc='black', fill=True, zorder=1)
+left_hand  = patches.Circle(xy=(center_x-200, 24), radius=15, fc='black', fill=True, zorder=1)
+right_hand = patches.Circle(xy=(center_x+200, 24), radius=15, fc='black', fill=True, zorder=1)
+
+RADI = 80
+circle_x = 110 + RADI*np.cos(3*np.pi/8)
+circle_y = 6   + RADI*np.sin(3*np.pi/8)
+#left_circle  = patches.Circle(xy=(origin_x-circle_x, circle_y), radius=RADI, ec='black', fill=False, zorder=1)
+#right_circle = patches.Circle(xy=(origin_x+circle_x, circle_y), radius=RADI, ec='black', fill=False, zorder=1)
+left_circle  = patches.Circle(xy=(center_x-250*np.cos(np.pi/3), center_y-250*np.sin(np.pi/3)), radius=RADI, ec='black', fill=False, zorder=1)
+right_circle = patches.Circle(xy=(center_x+250*np.cos(np.pi/3), center_y-250*np.sin(np.pi/3)), radius=RADI, ec='black', fill=False, zorder=1)
+ax3.add_patch(body)
+ax3.add_patch(left_hand)
+ax3.add_patch(right_hand)
+ax3.add_patch(left_circle)
+ax3.add_patch(right_circle)
+ax3.plot([center_x-250*np.cos(np.pi/3), center_x+250*np.cos(np.pi/3)], [center_y-250*np.sin(np.pi/3), center_y-250*np.sin(np.pi/3)], lw=1.5, color='black')
+ax3.plot([center_x-250*np.cos(np.pi/3), center_x                    ], [center_y-250*np.sin(np.pi/3), center_y                    ], lw=1.5, color='black')
+ax3.plot([center_x                    , center_x+250*np.cos(np.pi/3)], [center_y                    , center_y-250*np.sin(np.pi/3)], lw=1.5, color='black')
+
 plt.show()
