@@ -97,7 +97,7 @@ void Environment::output(int iter)
        << std::endl;
 
   theta1out << iter*DT << " " << theta1 << std::endl;
-  zout << iter*DT << " " << swimmer.pos().y << std::endl;
+  zout << iter*DT << " " << swimmer.pos().x << std::endl;
 }
 
 Environment::~Environment()
