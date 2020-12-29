@@ -26,7 +26,7 @@ def main(nums):
             beta=params[3],
             gamma=params[4])
     
-    fig = plt.figure(figsize=(16, 4), tight_layout=True)
+    fig = plt.figure(figsize=(14, 4), tight_layout=True)
     gs = fig.add_gridspec(1, 3)
     ax1 = fig.add_subplot(gs[0, 0:2])
     ax2 = fig.add_subplot(gs[0, 2])

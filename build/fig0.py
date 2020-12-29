@@ -234,5 +234,5 @@ ax3.plot([center_x-250*np.cos(np.pi/3), center_x                    ], [center_y
 ax3.plot([center_x                    , center_x+250*np.cos(np.pi/3)], [center_y                    , center_y-250*np.sin(np.pi/3)], lw=1.5, color='black')
 
 plt.show()
-fig.savefig('papers/fiure_0.png')
-fig.savefig('papers/fiure_0.eps')
+fig.savefig('papers/figure_0.png')
+fig.savefig('papers/figure_0.eps')
