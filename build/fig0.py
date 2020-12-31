@@ -200,22 +200,22 @@ ax2.axis('off')
 """
 ax3
 """
-width = 682
-height = 386
+width = 535
+height = 332
 origin_x = width/2
 origin_y = height/2
 ax3.set_xlim(origin_x-400, origin_x+400)
-ax3.set_ylim(origin_y+300, origin_y-300)
+ax3.set_ylim(origin_y+200, origin_y-250)
 ax3.set_aspect('equal')
-img3 = plt.imread('chlamidomonas.png')
+img3 = plt.imread('chlamidomonas2.jpg')
 ax3.imshow(img3, zorder=0)
-ax3.axis('off')
+#ax3.axis('off')
 
 center_x = origin_x
-center_y = origin_y + 70
+center_y = origin_y + 80
 body = patches.Circle(xy=(center_x, center_y), radius=40, fc='black', fill=True, zorder=1)
-left_hand  = patches.Circle(xy=(center_x-200, 24), radius=15, fc='black', fill=True, zorder=1)
-right_hand = patches.Circle(xy=(center_x+200, 24), radius=15, fc='black', fill=True, zorder=1)
+left_hand  = patches.Circle(xy=(center_x-200, 10), radius=15, fc='black', fill=True, zorder=1)
+right_hand = patches.Circle(xy=(center_x+200, 10), radius=15, fc='black', fill=True, zorder=1)
 
 RADI = 80
 circle_x = 110 + RADI*np.cos(3*np.pi/8)
