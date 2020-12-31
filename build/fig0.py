@@ -209,7 +209,7 @@ ax3.set_ylim(origin_y+200, origin_y-250)
 ax3.set_aspect('equal')
 img3 = plt.imread('chlamidomonas2.jpg')
 ax3.imshow(img3, zorder=0)
-#ax3.axis('off')
+ax3.axis('off')
 
 center_x = origin_x
 center_y = origin_y + 80
