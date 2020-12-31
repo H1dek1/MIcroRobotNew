@@ -320,7 +320,7 @@ axes[1].set_yticklabels([r'$10^{-3}$', r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$', 
 cm = parula_map
 
 #-------------------
-data = np.loadtxt('../phases/phases_b0.001.txt')
+data = np.loadtxt('../phases/phases_b1.0.txt')
 #data = np.loadtxt('../result/phases.txt')
 alpha = data[:,0]
 beta = data[:,1]
@@ -403,11 +403,8 @@ for i in range(len(time)):
 axes[2].legend(fontsize=12)
 
 plt.subplots_adjust(left=0.12, right=1.0, bottom=0.1, top=0.8)
-axes[0].text(0.01, 2, '(a)', fontsize=25)
-axes[1].text(0.01, 2, '(b)', fontsize=25)
-axes[2].text(-4, 10.9, '(c)', fontsize=25)
 fig.tight_layout()
-fig.savefig('../phases/test.eps')
-fig.savefig('../phases/test.png')
+fig.savefig('papers/figure_2.eps')
+fig.savefig('papers/figure_2.png')
 plt.show()
 

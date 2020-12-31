@@ -1,6 +1,6 @@
 #!/bin/bash
 
-beta=0.001
+beta=1.0
 
 alpha_arr=( \
 1e-1 2e-1 5e-1 \
