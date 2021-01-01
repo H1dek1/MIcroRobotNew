@@ -15,7 +15,8 @@ def main():
     length = np.sqrt(pos_x **2 + pos_y **2)
     swimmer_angle = np.arctan2(pos_y, pos_x)
 
-    fig, ax = plt.subplots(2, 2, figsize=(12, 9))
+    fig, ax = plt.subplots(2, 2, figsize=(16, 9))
+    mini_ax = fig.add_axes([0.2, 0.2, 0.5, 0.3])
     for i in range(2):
         ax[i, 0].set_xlabel(r'$\phi_B$', fontsize=25)
         ax[i, 0].set_ylabel(r'$\phi_S$', fontsize=25)
