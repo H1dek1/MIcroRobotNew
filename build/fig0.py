@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import scipy
+from scipy import ndimage
 
 plt.rcParams['font.family'] = 'Times New Roman'
-plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['font.size'] = 25
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
-plt.rcParams['text.latex.preamble']=[r"\usepackage{amsmath}"]
+plt.rcParams['text.latex.preamble']=[r'\usepackage{amsmath}']
 
-fig = plt.figure(figsize=(15, 9), tight_layout=True)
+fig = plt.figure(figsize=(13, 9), tight_layout=True)
 #fig.subplots_adjust(hspace=0.4, wspace=0.0)
 gs = fig.add_gridspec(2, 2)
 ax1 = fig.add_subplot(gs[0, 0])
@@ -24,10 +27,10 @@ ax0
 """
 # visual set
 ratio = 1.0
-ax0.set_xlim([-2.5, 4.5])
+ax0.set_xlim([-2.0, 4.5])
 ax0.set_ylim([-0.7, 2.5])
-ax0.set_xlabel(r'$x/l$')
-ax0.set_ylabel(r'$y/l$')
+ax0.set_xlabel(r'$x/\ell$')
+ax0.set_ylabel(r'$y/\ell$')
 ax0.set_aspect('equal')
 #ax0.axis('off')
 
@@ -45,7 +48,7 @@ pos_3 = center + [np.sqrt(3)/2 * np.cos(direct), np.sqrt(3)/2 * np.sin(direct)]
 ##particle
 perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, fc='gray')
 perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=ratio * 0.3, fc='gray')
-para = patches.Circle(xy=(pos_3[0], pos_3[1]), radius=ratio * 0.3, fc='orange')
+para = patches.Circle(xy=(pos_3[0], pos_3[1]), radius=ratio * 0.15, fc='orange')
 ax0.add_patch(perm1)
 ax0.add_patch(perm2)
 ax0.add_patch(para)
@@ -64,37 +67,44 @@ ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=3)
 ax0.plot([center[0],  center[0]+1.6*np.cos(direct)], [center[1], center[1]+1.6*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)
 ax0.plot([center[0],  center[0]+1.6],                [center[1], center[1]], linestyle='--', color='k', lw=1, zorder=5)
 
-ax0.plot([pos_1[0], pos_1[0]+0.8*np.cos(direct)],  [pos_1[1], pos_1[1]+0.8*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)
-ax0.plot([pos_1[0], pos_1[0]+0.8*np.cos(theta_1)], [pos_1[1], pos_1[1]+0.8*np.sin(theta_1)], linestyle='--', color='k', lw=1, zorder=5)
+#ax0.plot([pos_1[0], pos_1[0]+0.8*np.cos(direct)],  [pos_1[1], pos_1[1]+0.8*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)
+#ax0.plot([pos_1[0], pos_1[0]+0.8*np.cos(theta_1)], [pos_1[1], pos_1[1]+0.8*np.sin(theta_1)], linestyle='--', color='k', lw=1, zorder=5)
+#
+#ax0.plot([pos_2[0], pos_2[0]+0.8*np.cos(direct)],  [pos_2[1], pos_2[1]+0.8*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)
+#ax0.plot([pos_2[0], pos_2[0]+0.8*np.cos(theta_2)], [pos_2[1], pos_2[1]+0.8*np.sin(theta_2)], linestyle='--', color='k', lw=1, zorder=5)
 
-ax0.plot([pos_2[0], pos_2[0]+0.8*np.cos(direct)],  [pos_2[1], pos_2[1]+0.8*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)
-ax0.plot([pos_2[0], pos_2[0]+0.8*np.cos(theta_2)], [pos_2[1], pos_2[1]+0.8*np.sin(theta_2)], linestyle='--', color='k', lw=1, zorder=5)
-
-ext_x = -1.5
+ext_x = -1.0
 ext_y =  0.0
 ext_u = 0.8*np.cos(np.pi/6)
 ext_v = 0.8*np.sin(np.pi/6)
 ax0.plot([ext_x, ext_x+1.0], [ext_y, ext_y], linestyle='--', color='k', lw=1, zorder=5)
 ax0.plot([ext_x, ext_x+1.0*np.cos(np.pi/6)], [ext_y, ext_y+1.0*np.sin(np.pi/6)], linestyle='--', color='k', lw=1, zorder=5)
-ax0.quiver(ext_x, ext_y, ext_u, ext_v, pivot='mid', scale=5, width=1.0e-2, headwidth=3, headlength=5, headaxislength=4, color='black', zorder=2)
+#ax0.quiver(ext_x, ext_y, ext_u, ext_v, pivot='mid', scale=5, width=1.0e-2, headwidth=3, headlength=5, headaxislength=4, color='black', zorder=2)
+arrow_dict4 = dict(arrowstyle = '<->, head_width=0.15, head_length=0.3', color='k', linestyle='-', shrinkA=0, shrinkB=0, lw=2.0e+0)
+ax0.annotate('',
+        xy=(ext_x+ext_u/2, ext_y+ext_v/2),
+        xytext=(ext_x-ext_u/2, ext_y-ext_v/2),
+        arrowprops=arrow_dict4,
+        color='k',
+        zorder=4)
 ##measures
 R = 0.6*ratio
 arrow_dict0 = dict(arrowstyle = '->, head_width=0.2, head_length=0.3', connectionstyle='arc3, rad=0.3', color='k', linestyle='--', shrinkA=0, shrinkB=0)
 arrow_dict1 = dict(arrowstyle = '->, head_width=0.2, head_length=0.3', connectionstyle='arc3, rad=0.3', color='k', linestyle='--', shrinkA=0, shrinkB=0)
 arrow_dict2 = dict(arrowstyle = '->, head_width=0.2, head_length=0.3', connectionstyle='arc3, rad=-0.25', color='k', linestyle='--', shrinkA=0, shrinkB=0)
 arrow_dict3 = dict(arrowstyle = '->, head_width=0.2, head_length=0.3', connectionstyle='arc3, rad=0.25', color='k', linestyle='--', shrinkA=0, shrinkB=0)
-ax0.annotate('',
-        xy=(pos_1[0] + R*np.cos(theta_1), pos_1[1] + R*np.sin(theta_1)),
-        xytext=(pos_1[0] + R*np.cos(direct), pos_1[1] + R*np.sin(direct)),
-        arrowprops=arrow_dict1,
-        color='k',
-        zorder=4)
-ax0.annotate('',
-        xy=(pos_2[0] + R*np.cos(theta_2), pos_2[1] + R*np.sin(theta_2)),
-        xytext=(pos_2[0] + R*np.cos(direct), pos_2[1] + R*np.sin(direct)),
-        arrowprops=arrow_dict2,
-        color='k',
-        zorder=4)
+#ax0.annotate('',
+#        xy=(pos_1[0] + R*np.cos(theta_1), pos_1[1] + R*np.sin(theta_1)),
+#        xytext=(pos_1[0] + R*np.cos(direct), pos_1[1] + R*np.sin(direct)),
+#        arrowprops=arrow_dict1,
+#        color='k',
+#        zorder=4)
+#ax0.annotate('',
+#        xy=(pos_2[0] + R*np.cos(theta_2), pos_2[1] + R*np.sin(theta_2)),
+#        xytext=(pos_2[0] + R*np.cos(direct), pos_2[1] + R*np.sin(direct)),
+#        arrowprops=arrow_dict2,
+#        color='k',
+#        zorder=4)
 ax0.annotate('',
         xy=(    center[0] + 1.4*np.cos(direct), center[1] + 1.4*np.sin(direct)),
         xytext=(center[0] + 1.4*np.cos(0),      center[1] + 1.4*np.sin(0)),
@@ -107,11 +117,15 @@ ax0.annotate('',
         arrowprops=arrow_dict3,
         color='k',
         zorder=4)
-ax0.text(ext_x-0.2, ext_y+0.4, r'$\mathbf{B}^{ext}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
-ax0.text(ext_x+1.2*np.cos(np.pi/12), ext_y+1.2*np.sin(np.pi/12), r'$\phi^{ext}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
-ax0.text(pos_1[0]+0.9*np.cos(theta_1-np.pi/8), pos_1[1]+0.9*np.sin(theta_1-np.pi/8), r'$\theta_1$', fontsize=20, horizontalalignment='center', verticalalignment='center')
-ax0.text(pos_2[0]+0.9*np.cos(theta_2+np.pi/6), pos_2[1]+0.9*np.sin(theta_2+np.pi/6), r'$\theta_2$', fontsize=20, horizontalalignment='center', verticalalignment='center')
-ax0.text(center[0]+1.9*np.cos(direct/2), center[1]+1.9*np.sin(direct/2), r'$\phi^{head}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+ax0.text(ext_x-0.2, ext_y+0.4, r'$B^{\rm ext}$', fontsize=20, horizontalalignment='left', verticalalignment='top')
+ax0.text(ext_x+1.2*np.cos(np.pi/12), ext_y+1.2*np.sin(np.pi/12), r'$\phi^{\rm ext}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+#ax0.text(pos_1[0]+0.9*np.cos(theta_1-np.pi/8), pos_1[1]+0.9*np.sin(theta_1-np.pi/8), r'$\theta_1$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+#ax0.text(pos_2[0]+0.9*np.cos(theta_2+np.pi/6), pos_2[1]+0.9*np.sin(theta_2+np.pi/6), r'$\theta_2$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+ax0.text(center[0]+1.9*np.cos(direct/2), center[1]+1.9*np.sin(direct/2), r'$\phi^{\rm head}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+ax0.text(0, 2.1, r'left permanent magnetic particle',               fontsize=15, horizontalalignment='left', verticalalignment='center')
+ax0.text(0, 2.1-0.3, r'$\left(\cos\theta_1, \sin\theta_1 \right)$', fontsize=15, horizontalalignment='left', verticalalignment='center')
+ax0.text(1.05, 0, r'right permanent magnetic particle',              fontsize=15, horizontalalignment='left', verticalalignment='center')
+ax0.text(1.05, 0-0.3, r'$\left(\cos\theta_2, \sin\theta_2 \right)$', fontsize=15, horizontalalignment='left', verticalalignment='center')
 
 
 #ax0.plot([pos_2[0], pos_2[0]], [pos_2[1], pos_2[1]-1.2], linestyle='--', color='k', lw=1, zorder=5)
@@ -142,8 +156,8 @@ LX = 2.0
 LY = 1.0
 gridwidth = 0.1
 ratio = 1.0
-ax1.set_xlabel(r'$x/l$')
-ax1.set_ylabel(r'$y/l$')
+ax1.set_xlabel(r'$x/\ell$')
+ax1.set_ylabel(r'$y/\ell$')
 ax1.set_xlim([-LX, LX])
 ax1.set_ylim([-LY, LY])
 ax1.set_aspect('equal')
@@ -193,9 +207,13 @@ ax1.quiver(pos_2[0], pos_2[1], 0., 0.8, color='red', angles='xy', scale_units='x
 """
 ax2
 """
-img = plt.imread('microrobot_real.jpeg')
+img = plt.imread('microrobot_real2.png')
+#img = ndimage.rotate(img, -2)
 ax2.imshow(img)
 ax2.axis('off')
+#ax2.set_xlim(1200, 2600)
+#ax2.set_ylim(750, 2030)
+
 
 """
 ax3

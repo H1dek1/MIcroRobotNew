@@ -268,7 +268,7 @@ parula_map = LinearSegmentedColormap.from_list('parula', cm_data)
 
 
 plt.rcParams['font.family'] = 'Times New Roman'
-plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 plt.rcParams['ytick.minor.visible'] = False
@@ -350,6 +350,14 @@ fig.add_axes(ax_cb)
 plt.colorbar(mappable1, cax=ax_cb, ticks=[0.0, 0.5, 1.0, 1.5])
 #axes[1].set_aspect('equal')
 #axes[0].set_aspect('equal')
+delta = 0.01
+a = np.arange(0.09, 10, delta)
+g = np.arange(0.0009, 10, delta)
+A, G = np.meshgrid(a, g)
+X = 4*A + 5*G
+Y = 3*np.sqrt(3)*G
+Z = X**6 + 3 * X**4 * Y**2 - 16 * X**2 * Y**2 + 3 * X**2 * Y**4 + Y**6
+axes[1].contour(A, G, Z, [0], colors=['r'])
 
 """
 ax2
@@ -396,7 +404,7 @@ for i in range(len(time)):
     pole = pole_theta(time[i], theta_0=0)
     local_min = U(pole, time[i])
     axes[2].plot(pole, local_min, color=mcm.jet(i/(0+len(time))), marker='.', markersize=15)
-    axes[2].plot(theta, potential, color=mcm.jet(i/(0+len(time))), label='$t*={}$'.format(time[i]))
+    axes[2].plot(theta, potential, color=mcm.jet(i/(0+len(time))), label='$t^*={}$'.format(time[i]))
     #ax.axvline(pole, ls='--', color='C{}'.format(i))
     print(pole)
     i += 1

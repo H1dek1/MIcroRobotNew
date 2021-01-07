@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from drawer import Drawer
 
 plt.rcParams['font.family'] = 'Times New Roman'
-plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['font.size'] = 25
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
@@ -38,8 +38,8 @@ def main(nums):
     properties(
             ax=ax1,
             equal_aspect=True,
-            xlabel='$\it{x}/l$',
-            ylabel='$y/l$',
+            xlabel=r'$x/\ell$',
+            ylabel=r'$y/\ell$',
             #xlim=[-1, 1],
             #ylim=[-1, 4],
             )
@@ -58,12 +58,12 @@ def main(nums):
     ax2.set_xticks(xticks)
     ax2.set_xticklabels(xticklabels, fontsize=25)
     ax2.set_yticks([0, 2*np.pi, 4*np.pi])
-    ax2.set_yticklabels(['0', '$2\\pi$', '$4\\pi$'], fontsize=25)
+    ax2.set_yticklabels([r'$0$', r'$2\pi$', r'$4\pi$'], fontsize=25)
 
     properties(
             ax=ax2,
-            xlabel='$t*$',
-            ylabel='$\\theta$',
+            xlabel=r'$t^*$',
+            ylabel=r'$\theta$',
             xlim=[0, 2.5],
             ylim=[-0.5*np.pi, 5.0*np.pi],
             )
@@ -78,8 +78,8 @@ def main(nums):
     ax3.set_xticklabels(xticklabels, fontsize=25)
     properties(
             ax=ax3,
-            xlabel='$t*$',
-            ylabel='$y/l$',
+            xlabel=r'$t^*$',
+            ylabel=r'$y/\ell$',
             xlim=[0, 2.5],
             ylim=[-0.05, 0.5],
             )
@@ -94,7 +94,7 @@ def main(nums):
 def properties(
         ax, 
         equal_aspect=False,
-        xlabel='$x$', ylabel='$y$',
+        xlabel=r'$x$', ylabel=r'$y$',
         xlim=None, ylim=None,
         xticks=None, yticks=None,
         xticklabels=None, yticklabels=None):
