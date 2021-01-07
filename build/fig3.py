@@ -37,8 +37,8 @@ def main():
     """
     # visual set
     ratio = 1.0
-    ax0.set_xlim([-4.0, 6.0])
-    ax0.set_ylim([-1.2, 3.0])
+    ax0.set_xlim([-3.3, 5.0])
+    ax0.set_ylim([-1.5, 3.5])
     ax0.set_xlabel(r'$x/\ell$')
     ax0.set_ylabel(r'$y/\ell$')
     ax0.set_aspect('equal')
