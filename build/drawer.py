@@ -64,7 +64,7 @@ class Drawer:
                 zorder=0)
         para = patches.Circle(
                 xy=(self.para_x[steps], self.para_y[steps]),
-                radius=self.a,
+                radius=self.a/2,
                 fc='orange',
                 ec='orange',
                 fill=True,
