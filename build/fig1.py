@@ -38,13 +38,36 @@ def main(nums):
     """
     #times = np.array([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
     #times = np.array([0.0, 0.1, 0.2, 0.3, 0.4, 0.5])
-    times = np.array([0.0, 0.4, 0.45, 0.50, 0.55, 0.60])
-    positions = np.array([0.0, 2.0, 4.0, 6.0, 8.0, 10.0])
+    #times = np.array([0.0, 0.4, 0.45, 0.50, 0.55, 0.60])
+    times = np.array([0.0, 0.4, 0.44, 0.48, 0.52, 0.56, 0.60,
+        0.80, 0.84, 0.88, 0.92, 0.96, 1.00, 1.20])
+    positions = np.array([
+        [ 0.0, 2.5], 
+        [ 2.0, 2.5], 
+        [ 4.0, 2.5], 
+        [ 6.0, 2.5],
+        [ 8.0, 2.5],
+        [10.0, 2.5],
+        [12.0, 2.5],
+        [ 0.0, 0.0], 
+        [ 2.0, 0.0], 
+        [ 4.0, 0.0], 
+        [ 6.0, 0.0],
+        [ 8.0, 0.0],
+        [10.0, 0.0],
+        [12.0, 0.0]])
 
-    ax0.set_xlim(-0.5, 11.5)
-    ax0.set_ylim(-1.2, 1.2)
+    ax0.set_xlim(-0.5, 13.5)
+    ax0.set_ylim(-1.5, 3.5)
     ax0.set_aspect('equal')
-    ax0.axis('off')
+    #ax0.axis('off')
+    ax0.tick_params(
+            labelbottom=False,
+            labelleft=False,
+            labelright=False,
+            labeltop=False,
+            bottom=False,
+            left=False)
     
     for i in range(len(times)):
         swimmer_stamps(ax=ax0, time=times[i], data=data, dt=params[0], position=positions[i])
@@ -141,7 +164,7 @@ def swimmer_stamps(ax, time, data, dt, position):
     para_u = data[int(time/dt), 7] / para_max
     para_v = data[int(time/dt), 8] / para_max
     
-    center = np.array([position, 0])
+    center = position
     perm1  = center + np.array([0, 0.5])
     perm2  = center - np.array([0, 0.5])
     para   = center + np.array([np.sqrt(3)/2, 0])
@@ -167,7 +190,7 @@ def swimmer_stamps(ax, time, data, dt, position):
             color='k', angles='xy', scale_units='xy', scale=1, pivot='mid', 
             width=4.0e-3, zorder=2)
     #time
-    ax.text(center[0], -1.0, r'$t^*={}$'.format(time), horizontalalignment='left', verticalalignment='center')
+    ax.text(center[0]-0.1, center[1]-1.0, r'$t^*={}$'.format(time), horizontalalignment='left', verticalalignment='center', fontsize=15)
 
 
 if __name__ == '__main__':
