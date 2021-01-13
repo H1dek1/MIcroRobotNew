@@ -15,7 +15,7 @@ plt.rcParams['ytick.direction'] = 'in'
 
 def main(nums):
     draw_times = nums
-    data = np.loadtxt('../result/result.txt', skiprows=2)
+    data = np.loadtxt('../result/result.txt', skiprows=int(2))
     params = np.loadtxt('../result/params.txt', skiprows=1)
     theta = np.loadtxt('../result/theta1out.txt')
     traj = np.loadtxt('../result/zout.txt')
@@ -40,7 +40,7 @@ def main(nums):
     #times = np.array([0.0, 0.1, 0.2, 0.3, 0.4, 0.5])
     #times = np.array([0.0, 0.4, 0.45, 0.50, 0.55, 0.60])
     times = np.array([0.0, 0.4, 0.44, 0.48, 0.52, 0.56, 0.60,
-        0.80, 0.84, 0.88, 0.92, 0.96, 1.00, 1.20])
+        0.80, 0.84, 0.88, 0.92, 0.96, 1.00])
     positions = np.array([
         [ 0.0, 2.5], 
         [ 2.0, 2.5], 
@@ -49,7 +49,7 @@ def main(nums):
         [ 8.0, 2.5],
         [10.0, 2.5],
         [12.0, 2.5],
-        [ 0.0, 0.0], 
+        #[ 0.0, 0.0], 
         [ 2.0, 0.0], 
         [ 4.0, 0.0], 
         [ 6.0, 0.0],
@@ -84,8 +84,9 @@ def main(nums):
             #ylim=[-1, 4],
             )
 
-    for time in draw_times:
-        drawer.draw_swimmer(data=data, ax=ax1, time=time)
+    label_time = np.array([0, 20])
+    for i in range(len(draw_times)):
+        drawer.draw_swimmer(data=data, ax=ax1, time=draw_times[i], label_time=label_time[i])
         #drawer.draw_ext_field(data=data, ax=axes, time=0)
 
     ax1.set_ylim(-1, 1)
@@ -108,7 +109,7 @@ def main(nums):
             ylim=[-0.5*np.pi, 5.0*np.pi],
             )
 
-    ax2.plot(theta[:, 0], theta[:, 1], color="red", label=r'$\theta$')
+    ax2.plot(theta[:, 0], theta[:, 1]-5*2*np.pi, color="red", label=r'$\theta$')
 
     """
     ax3

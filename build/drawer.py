@@ -39,11 +39,11 @@ class Drawer:
         self.para_v = data[:, 8] / self.para_max * (2*self.a)
 
 
-    def draw_swimmer(self, data, ax, time):
+    def draw_swimmer(self, data, ax, time, label_time):
         self.preprocess(data)
         steps = int(time / self.dt)
         ax.text(self.center_x[steps]+0.4, self.para_y[steps]+0.7, 
-                r'$t^*={}$'.format(time),
+                r'$t^*={}$'.format(label_time),
                 horizontalalignment='left',
                 verticalalignment='center',
                 fontsize=20)
