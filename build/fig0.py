@@ -59,9 +59,9 @@ ax0.quiver(pos_1[0], pos_1[1], 0.12*np.cos(theta_1), 0.12*np.sin(theta_1), pivot
 ax0.quiver(pos_2[0], pos_2[1], 0.12*np.cos(theta_2), 0.12*np.sin(theta_2), pivot='mid', scale=1.5, width=0.7e-2, headwidth=3, headlength=5, headaxislength=4, color='black', zorder=2)
 
 ##frames
-ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=3)
-ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=3)
-ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=3)
+ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=0)
+ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=0)
+ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=0)
 
 
 ax0.plot([center[0],  center[0]+1.6*np.cos(direct)], [center[1], center[1]+1.6*np.sin(direct)], linestyle='--', color='k', lw=1, zorder=5)

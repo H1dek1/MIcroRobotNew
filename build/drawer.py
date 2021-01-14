@@ -43,7 +43,7 @@ class Drawer:
         self.preprocess(data)
         steps = int(time / self.dt)
         ax.text(self.center_x[steps]+0.4, self.para_y[steps]+0.7, 
-                r'$t^*={}$'.format(label_time),
+                r'$t^*={}$'.format(format(label_time, '.1f')),
                 horizontalalignment='left',
                 verticalalignment='center',
                 fontsize=20)
@@ -54,21 +54,21 @@ class Drawer:
                 fc='gray',
                 ec='gray',
                 fill=True,
-                zorder=0)
+                zorder=1)
         perm2 = patches.Circle(
                 xy=(self.perm2_x[steps], self.perm2_y[steps]),
                 radius=self.a,
                 fc='gray',
                 ec='gray',
                 fill=True,
-                zorder=0)
+                zorder=1)
         para = patches.Circle(
                 xy=(self.para_x[steps], self.para_y[steps]),
                 radius=self.a/2,
                 fc='orange',
                 ec='orange',
                 fill=True,
-                zorder=0)
+                zorder=1)
         ax.add_patch(perm1)
         ax.add_patch(perm2)
         ax.add_patch(para)
@@ -79,7 +79,7 @@ class Drawer:
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
                 width=1.0e-2,
-                zorder=1)
+                zorder=2)
         ax.quiver(
                 self.perm2_x[steps], self.perm2_y[steps],
                 self.perm2_u[steps], self.perm2_v[steps],
@@ -87,7 +87,7 @@ class Drawer:
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
                 width=1.0e-2,
-                zorder=1)
+                zorder=2)
         ax.quiver(
                 self.para_x[steps], self.para_y[steps],
                 self.para_u[steps], self.para_v[steps],
@@ -95,16 +95,16 @@ class Drawer:
                 angles='xy', scale_units='xy', scale=1,
                 pivot='mid',
                 width=1.0e-2,
-                zorder=1)
+                zorder=2)
         ax.plot([self.perm1_x[steps], self.perm2_x[steps]],
                 [self.perm1_y[steps], self.perm2_y[steps]],
-                'k-', lw=5, zorder=2)
+                'k-', lw=5, zorder=0)
         ax.plot([self.perm2_x[steps], self.para_x[steps]],
                 [self.perm2_y[steps], self.para_y[steps]],
-                'k-', lw=5, zorder=2)
+                'k-', lw=5, zorder=0)
         ax.plot([self.para_x[steps], self.perm1_x[steps]],
                 [self.para_y[steps], self.perm1_y[steps]],
-                'k-', lw=5, zorder=2)
+                'k-', lw=5, zorder=0)
 
     def draw_ext_field(self, data, ax, time):
         steps = int(time / self.dt)

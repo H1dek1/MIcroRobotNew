@@ -42,23 +42,23 @@ def main(nums):
     times = np.array([0.0, 0.4, 0.44, 0.48, 0.52, 0.56, 0.60,
         0.80, 0.84, 0.88, 0.92, 0.96, 1.00])
     positions = np.array([
-        [ 0.0, 2.5], 
-        [ 2.0, 2.5], 
-        [ 4.0, 2.5], 
-        [ 6.0, 2.5],
-        [ 8.0, 2.5],
-        [10.0, 2.5],
-        [12.0, 2.5],
+        [ 0.0, 3.0], 
+        [ 3.0, 3.0], 
+        [ 6.0, 3.0], 
+        [ 9.0, 3.0],
+        [12.0, 3.0],
+        [15.0, 3.0],
+        [18.0, 3.0],
         #[ 0.0, 0.0], 
-        [ 2.0, 0.0], 
-        [ 4.0, 0.0], 
-        [ 6.0, 0.0],
-        [ 8.0, 0.0],
-        [10.0, 0.0],
-        [12.0, 0.0]])
+        [ 3.0, 0.0], 
+        [ 6.0, 0.0], 
+        [ 9.0, 0.0],
+        [12.0, 0.0],
+        [15.0, 0.0],
+        [18.0, 0.0]])
 
-    ax0.set_xlim(-0.5, 13.5)
-    ax0.set_ylim(-1.5, 3.5)
+    ax0.set_xlim(-1.0, 20.0)
+    ax0.set_ylim(-1.5, 4.0)
     ax0.set_aspect('equal')
     #ax0.axis('off')
     ax0.tick_params(
@@ -90,6 +90,8 @@ def main(nums):
         #drawer.draw_ext_field(data=data, ax=axes, time=0)
 
     ax1.set_ylim(-1, 1)
+    ax1.quiver(1.5, 0, 1.3, 0, color='r', angles='xy', scale_units='xy', scale=1, 
+            width=2.0e-2, headwidth=3.0, headlength=4, headaxislength=4, zorder=2)
     """
     ax2
     """
@@ -98,15 +100,15 @@ def main(nums):
     xticklabels = [str(n) for n in xticks]
     ax2.set_xticks(xticks)
     ax2.set_xticklabels(xticklabels, fontsize=25)
-    ax2.set_yticks([0, 2*np.pi, 4*np.pi])
-    ax2.set_yticklabels([r'$0$', r'$2\pi$', r'$4\pi$'], fontsize=25)
+    ax2.set_yticks([0, 2*np.pi, 4*np.pi, 6*np.pi])
+    ax2.set_yticklabels([r'$0$', r'$2\pi$', r'$4\pi$', r'$6\pi$'], fontsize=25)
 
     properties(
             ax=ax2,
             xlabel=r'$t^*$',
             ylabel=r'$\theta$',
             xlim=[0, 2.5],
-            ylim=[-0.5*np.pi, 5.0*np.pi],
+            ylim=[-0.5*np.pi, 6.0*np.pi],
             )
 
     ax2.plot(theta[:, 0], theta[:, 1]-5*2*np.pi, color="red", label=r'$\theta$')
@@ -170,28 +172,28 @@ def swimmer_stamps(ax, time, data, dt, position):
     perm2  = center - np.array([0, 0.5])
     para   = center + np.array([np.sqrt(3)/2, 0])
     #schemes
-    ax.plot([perm1[0], perm2[0]], [perm1[1], perm2[1]], color='k', lw=4.0e+0, zorder=1)
-    ax.plot([perm1[0], para[0]], [perm1[1], para[1]],   color='k', lw=4.0e+0, zorder=1)
-    ax.plot([perm2[0], para[0]], [perm2[1], para[1]],   color='k', lw=4.0e+0, zorder=1)
+    ax.plot([perm1[0], perm2[0]], [perm1[1], perm2[1]], color='k', lw=3.5e+0, zorder=0)
+    ax.plot([perm1[0], para[0]], [perm1[1], para[1]],   color='k', lw=3.5e+0, zorder=0)
+    ax.plot([perm2[0], para[0]], [perm2[1], para[1]],   color='k', lw=3.5e+0, zorder=0)
     #particles
-    circle_1 = patches.Circle(xy=perm1, radius=0.3,  fc='gray',   ec='gray',   fill=True, zorder=0)
-    circle_2 = patches.Circle(xy=perm2, radius=0.3,  fc='gray',   ec='gray',   fill=True, zorder=0)
-    circle_3 = patches.Circle(xy=para,  radius=0.15, fc='orange', ec='orange', fill=True, zorder=0)
+    circle_1 = patches.Circle(xy=perm1, radius=0.3,  fc='gray',   ec='gray',   fill=True, zorder=1)
+    circle_2 = patches.Circle(xy=perm2, radius=0.3,  fc='gray',   ec='gray',   fill=True, zorder=1)
+    circle_3 = patches.Circle(xy=para,  radius=0.15, fc='orange', ec='orange', fill=True, zorder=1)
     ax.add_patch(circle_1)
     ax.add_patch(circle_2)
     ax.add_patch(circle_3)
     #vector
     ax.quiver(perm1[0], perm1[1], 0.6*np.cos(theta1), 0.6*np.sin(theta1),
             color='k', angles='xy', scale_units='xy', scale=1, pivot='mid', 
-            width=4.0e-3, zorder=2)
+            width=3.0e-3, zorder=2)
     ax.quiver(perm2[0], perm2[1], 0.6*np.cos(theta2), 0.6*np.sin(theta2),
             color='k', angles='xy', scale_units='xy', scale=1, pivot='mid', 
-            width=4.0e-3, zorder=2)
+            width=3.0e-3, zorder=2)
     ax.quiver(para[0], para[1], 0.6*para_u, 0.6*para_v,
             color='k', angles='xy', scale_units='xy', scale=1, pivot='mid', 
-            width=4.0e-3, zorder=2)
+            width=3.0e-3, zorder=2)
     #time
-    ax.text(center[0]-0.1, center[1]-1.0, r'$t^*={}$'.format(time), horizontalalignment='left', verticalalignment='center', fontsize=15)
+    ax.text(center[0]-0.1, center[1]-1.2, r'$t^*={}$'.format(format(time, '.2f')), horizontalalignment='left', verticalalignment='center', fontsize=20)
 
 
 if __name__ == '__main__':

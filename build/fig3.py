@@ -19,7 +19,7 @@ def main():
     length = np.sqrt(pos_x **2 + pos_y **2)
     swimmer_angle = np.arctan2(pos_y, pos_x)
 
-    fig = plt.figure(figsize=(16, 12), tight_layout=True)
+    fig = plt.figure(figsize=(16, 10), tight_layout=True)
     gs = fig.add_gridspec(5, 2)
     ax0 = fig.add_subplot(gs[0:2, 0])
     ax1 = fig.add_subplot(gs[0:2, 1])
@@ -146,12 +146,12 @@ def main():
     """
     ax1
     """
-    theta = np.loadtxt('../result/theta1out.txt')
-    angle = np.loadtxt('../result/result.txt', skiprows=2)
+    theta = np.loadtxt('../result/fig3_theta1out.txt')
+    angle = np.loadtxt('../result/fig3_result.txt', skiprows=2)
     ax1.set_xlabel(r'$t^*$')
     ax1.set_ylabel(r'$\phi^{\rm head}$')
     ax1.set_xlim(0, 10)
-    ax1.set_ylim(-0.1, 1*np.pi/4)
+    ax1.set_ylim(-10.1, 10*np.pi/4)
     xticks = np.arange(0, 11.0, 2.0)
     xticklabels = [str(n) for n in xticks]
     ax1.set_xticks(xticks)
