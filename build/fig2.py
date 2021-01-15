@@ -312,15 +312,15 @@ axes[1].set_xlabel(r'$\alpha$', fontsize=25)
 axes[1].set_ylabel(r'$\gamma$', fontsize=25)
 axes[1].set_xscale('log')
 axes[1].set_yscale('log')
-axes[1].set_xticks([0.1, 1, 10, 100, 1000])
-axes[1].set_xticklabels([r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$', r'$10^{2}$', r'$10^{3}$'], fontsize=20)
+axes[1].set_xticks([0.01, 0.1, 1, 10, 100, 1000])
+axes[1].set_xticklabels([r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$', r'$10^{2}$', r'$10^{3}$'], fontsize=20)
 axes[1].set_yticks([1e-3, 1e-2, 1e-1, 1, 10])
 axes[1].set_yticklabels([r'$10^{-3}$', r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$'], fontsize=20)
 
 cm = parula_map
 
 #-------------------
-data = np.loadtxt('../phases/phases_b1.0.txt')
+data = np.loadtxt('../phases/phases_b1.0-2.txt')
 #data = np.loadtxt('../result/phases.txt')
 alpha = data[:,0]
 beta = data[:,1]
@@ -351,8 +351,8 @@ plt.colorbar(mappable1, cax=ax_cb, ticks=[0.0, 0.5, 1.0, 1.5])
 #axes[1].set_aspect('equal')
 #axes[0].set_aspect('equal')
 delta = 0.01
-a = np.arange(0.09, 10, delta)
-g = np.arange(0.0009, 10, delta)
+a = np.arange(0.007, 10, delta)
+g = np.arange(0.0007, 10, delta)
 A, G = np.meshgrid(a, g)
 X = 4*A + 5*G
 Y = 3*np.sqrt(3)*G

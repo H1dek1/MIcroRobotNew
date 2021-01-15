@@ -26,11 +26,11 @@ def main():
     ax3 = fig.add_subplot(gs[2:5, 0])
     ax2 = fig.add_subplot(gs[2:5, 1])
 
-    ax2_mini = fig.add_axes([0.220, 0.41, 0.3, 0.16])
-    ax3_mini = fig.add_axes([0.695, 0.41, 0.3, 0.16])
+    #ax2_mini = fig.add_axes([0.220, 0.41, 0.3, 0.16])
+    #ax3_mini = fig.add_axes([0.695, 0.41, 0.3, 0.16])
 
-    #ax2_mini = fig.add_axes([0.038, 0.20, 0.3, 0.16])
-    #ax3_mini = fig.add_axes([0.520, 0.20, 0.3, 0.16])
+    ax2_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
+    ax3_mini = fig.add_axes([0.517, 0.16, 0.3, 0.18])
 
     """
     ax0
@@ -38,7 +38,7 @@ def main():
     # visual set
     ratio = 1.0
     ax0.set_xlim([-3.3, 5.0])
-    ax0.set_ylim([-1.5, 3.5])
+    ax0.set_ylim([-1.0, 2.5])
     ax0.set_xlabel(r'$x/\ell$')
     ax0.set_ylabel(r'$y/\ell$')
     ax0.set_aspect('equal')
@@ -82,7 +82,7 @@ def main():
     ax0.plot([ext_x, ext_x+1.2], [ext_y, ext_y], linestyle='--', color='k', lw=1, zorder=5)
     ax0.plot([ext_x, ext_x+1.2*np.cos(np.pi/6)], [ext_y, ext_y+1.2*np.sin(np.pi/6)], linestyle='--', color='k', lw=1, zorder=5)
 #    ax0.quiver(ext_x, ext_y, ext_u, ext_v, pivot='mid', scale=6, width=8.0e-3, headwidth=3, headlength=5, headaxislength=4, color='black', zorder=2)
-    arrow_dict4 = dict(arrowstyle = '<->, head_width=0.15, head_length=0.3', color='k', linestyle='-', shrinkA=0, shrinkB=0, lw=2.0e+0)
+    arrow_dict4 = dict(arrowstyle = '<->, head_width=0.10, head_length=0.4', color='k', linestyle='-', shrinkA=0, shrinkB=0, lw=2.0e+0)
     ax0.annotate('',
             xy=(ext_x+ext_u/2, ext_y+ext_v/2),
             xytext=(ext_x-ext_u/2, ext_y-ext_v/2),
@@ -146,12 +146,12 @@ def main():
     """
     ax1
     """
-    theta = np.loadtxt('../result/fig3_theta1out.txt')
-    angle = np.loadtxt('../result/fig3_result.txt', skiprows=2)
+    theta = np.loadtxt('../phases/fig3_theta1out.txt')
+    angle = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
     ax1.set_xlabel(r'$t^*$')
     ax1.set_ylabel(r'$\phi^{\rm head}$')
     ax1.set_xlim(0, 10)
-    ax1.set_ylim(-10.1, 10*np.pi/4)
+    ax1.set_ylim(-0.1, 1*np.pi/4)
     xticks = np.arange(0, 11.0, 2.0)
     xticklabels = [str(n) for n in xticks]
     ax1.set_xticks(xticks)
@@ -199,7 +199,7 @@ def main():
 
     fig.savefig('papers/figure_3.png')
     fig.savefig('papers/figure_3.eps')
-    plt.show()
+    #plt.show()
 
 if __name__ == '__main__':
     main()
