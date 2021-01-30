@@ -31,7 +31,6 @@ def main():
 
     ax2_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
     ax3_mini = fig.add_axes([0.517, 0.16, 0.3, 0.18])
-
     """
     ax0
     """
@@ -70,9 +69,9 @@ def main():
     ax0.quiver(pos_2[0], pos_2[1], 0.08*np.cos(theta_2), 0.08*np.sin(theta_2), pivot='mid', scale=1.5, width=0.5e-2, headwidth=3.0, headlength=4, headaxislength=4, color='black', zorder=2)
     
     ##frames
-    ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=3)
-    ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=3)
-    ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=3)
+    ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=0)
+    ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=0)
+    ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=0)
     
     
     ext_x = -2.5
@@ -136,9 +135,9 @@ def main():
     ax0.quiver(pos_2[0], pos_2[1], 0.08*np.cos(theta_2), 0.08*np.sin(theta_2), pivot='mid', scale=1.5, width=0.5e-2, headwidth=3.0, headlength=4, headaxislength=4, color='black', zorder=2)
     
     ##frames
-    ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=3)
-    ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=3)
-    ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=3)
+    ax0.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=0)
+    ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=0)
+    ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=0)
     
     
 

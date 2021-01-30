@@ -273,7 +273,7 @@ plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 plt.rcParams['ytick.minor.visible'] = False
 # ex.) dejavusans, dejavuserif, cm, stix, stixsans, custom
-plt.rcParams['font.size'] = 10
+plt.rcParams['font.size'] = 25
 #print(plt.rcParams['mathtext.fontset'])
 print(plt.rcParams['mathtext.default'])
 
@@ -299,7 +299,7 @@ gamma = data[:,2]
 
 n_iter = data[:,3]
 pos_x = data[:,4]
-pos_y = np.round(data[:,5], decimals=4)
+pos_y = np.round(data[:,5]/10, decimals=4)
 print(min(pos_y))
 print(max(pos_y))
 #-------------------
@@ -328,7 +328,7 @@ gamma = data[:,2]
 
 n_iter = data[:,3]
 pos_x = data[:,4]
-pos_y = np.round(data[:,5], decimals=4)
+pos_y = np.round(data[:,5]/10, decimals=4)
 print(min(pos_y))
 print(max(pos_y))
 #-------------------
@@ -339,15 +339,16 @@ mappable1 = axes[1].scatter(alpha, gamma, c=pos_y, vmin=min(pos_y), vmax=max(pos
 divider = make_axes_locatable(axes[1])
 ax_cb = divider.new_horizontal(size='5%', pad=0.05)
 fig.add_axes(ax_cb)
-ax_cb.set_yticks([0.0, 0.5, 1.0, 1.5])
-ax_cb.set_yticklabels([0.0, 0.5, 1.0, 1.5], fontsize=20)
-plt.colorbar(mappable1, cax=ax_cb, ticks=[0.0, 0.5, 1.0, 1.5])
+ax_cb.set_yticks([0.0, 0.05, 0.1, 0.15])
+ax_cb.set_yticklabels([0.0, 0.05, 0.1, 0.15], fontsize=20)
+plt.colorbar(mappable1, cax=ax_cb, ticks=[0.0, 0.05, 0.1, 0.15], label=r'$x/\ell$')
+
 divider = make_axes_locatable(axes[0])
 ax_cb = divider.new_horizontal(size='5%', pad=0.05)
-ax_cb.set_yticks([0.0, 0.5, 1.0, 1.5])
-ax_cb.set_yticklabels([0.0, 0.5, 1.0, 1.5], fontsize=20)
+ax_cb.set_yticks([0.0, 0.05, 0.1, 0.15])
+ax_cb.set_yticklabels([0.0, 0.05, 0.1, 0.15], fontsize=20)
 fig.add_axes(ax_cb)
-plt.colorbar(mappable1, cax=ax_cb, ticks=[0.0, 0.5, 1.0, 1.5])
+plt.colorbar(mappable0, cax=ax_cb, ticks=[0.0, 0.05, 0.1, 0.15], label=r'$x/\ell$')
 #axes[1].set_aspect('equal')
 #axes[0].set_aspect('equal')
 delta = 0.01

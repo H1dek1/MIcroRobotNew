@@ -111,7 +111,7 @@ def main(start):
 
         matplotlibSetting(ax1)
         ax1.quiver(-1.2, 0.0, ext_x[0], ext_y[0], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.3, 0.0, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.text(-1.5, 0.3, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[0], perm1_y[0]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)
@@ -154,7 +154,7 @@ def main(start):
 
         matplotlibSetting(ax1)
         ax1.quiver(-1.2, 0.0, ext_x[i], ext_y[i], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.3, 0.0, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.text(-1.5, 0.3, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[i], perm1_y[i]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)

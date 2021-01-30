@@ -32,6 +32,74 @@ def main(nums):
     ax1 = fig.add_subplot(gs[1, 0:2])
     ax2 = fig.add_subplot(gs[1, 2])
     ax3 = ax2.twinx()
+    ax4_mini = fig.add_axes([0.610, 0.32, 0.3, 0.18])
+    """
+    ax4_mini
+    """
+    ax4_mini.set_aspect('equal')
+    ax4_mini.set_xlim(-0.8, 1.6)
+    ax4_mini.set_ylim(-1.2, 1.2)
+    ax4_mini.tick_params(labelbottom=False,
+            labelleft=False,
+            labelright=False,
+            labeltop=False,
+            bottom=False,
+            left=False)
+
+    center = np.array([0, 0])
+    direct = 0
+    ratio = 1
+    #drawing
+    #pos_1 = [ratio * -0.5, 0]
+    #pos_2 = [ratio * 0.5, 0]
+    #pos_3 = [0, ratio * np.sqrt(3)/2]
+    
+    pos_1 = center + [-0.5*np.sin(direct),  0.5*np.cos(direct)]
+    pos_2 = center + [ 0.5*np.sin(direct), -0.5*np.cos(direct)]
+    pos_3 = center + [np.sqrt(3)/2 * np.cos(direct), np.sqrt(3)/2 * np.sin(direct)]
+    ##particle
+    perm1 = patches.Circle(xy=(pos_1[0], pos_1[1]), radius=ratio * 0.3, fc='gray')
+    perm2 = patches.Circle(xy=(pos_2[0], pos_2[1]), radius=ratio * 0.3, fc='gray')
+    para = patches.Circle(xy=(pos_3[0], pos_3[1]), radius=ratio * 0.15, fc='orange')
+    ax4_mini.add_patch(perm1)
+    ax4_mini.add_patch(perm2)
+    ax4_mini.add_patch(para)
+    ##vectors
+    theta_1 = direct + np.pi/5
+    theta_2 = direct - np.pi/5
+    abso = 0.25
+    ax4_mini.quiver(pos_1[0], pos_1[1], abso*np.cos(theta_1), abso*np.sin(theta_1), pivot='mid', scale=1.0, width=2.7e-2, headwidth=3.0, headlength=4.2, headaxislength=3.6, color='black', zorder=2)
+    ax4_mini.quiver(pos_2[0], pos_2[1], abso*np.cos(theta_2), abso*np.sin(theta_2), pivot='mid', scale=1.0, width=2.7e-2, headwidth=3.0, headlength=4.2, headaxislength=3.6, color='black', zorder=2)
+    
+    ##frames
+    ax4_mini.plot([pos_1[0], pos_2[0]], [pos_1[1], pos_2[1]], 'k-', lw=3, zorder=0)
+    ax4_mini.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=0)
+    ax4_mini.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=0)
+    
+    ax4_mini.plot([pos_1[0], pos_1[0]+1], [pos_1[1], pos_1[1]], linestyle='--', color='k', lw=1, zorder=5)
+    ax4_mini.plot([pos_1[0], pos_1[0]+np.cos(theta_1)], [pos_1[1], pos_1[1]+np.sin(theta_1)], linestyle='--', color='k', lw=1, zorder=5)
+    arrow_dict0 = dict(arrowstyle = '->, head_width=0.15, head_length=0.3', connectionstyle='arc3, rad=0.2', color='k', linestyle='--', shrinkA=0, shrinkB=0)
+    ax4_mini.annotate('',
+            xy=(pos_1[0]+0.65*np.cos(theta_1), pos_1[1]+0.65*np.sin(theta_1)),
+            xytext=(pos_1[0]+0.65, pos_1[1]),
+            arrowprops=arrow_dict0,
+            color='k',
+            zorder=4)
+    
+    ax4_mini.plot([pos_2[0], pos_2[0]+1], [pos_2[1], pos_2[1]], linestyle='--', color='k', lw=1, zorder=5)
+    ax4_mini.plot([pos_2[0], pos_2[0]+np.cos(theta_2)], [pos_2[1], pos_2[1]+np.sin(theta_2)], linestyle='--', color='k', lw=1, zorder=5)
+    arrow_dict1 = dict(arrowstyle = '->, head_width=0.15, head_length=0.3', connectionstyle='arc3, rad=-0.2', color='k', linestyle='--', shrinkA=0, shrinkB=0)
+    ax4_mini.annotate('',
+            xy=(pos_2[0]+0.65*np.cos(theta_2), pos_2[1]+0.65*np.sin(theta_2)),
+            xytext=(pos_2[0]+0.65, pos_2[1]),
+            arrowprops=arrow_dict1,
+            color='k',
+            zorder=4)
+    ax4_mini.text(pos_1[0]+0.9*np.cos(theta_1/2), pos_1[1]+0.9*np.sin(theta_1/2), r'$\theta$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+    ax4_mini.text(pos_2[0]+0.9*np.cos(theta_2/2), pos_2[1]+0.9*np.sin(theta_2/2), r'$\theta$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+    
+
+
 
     """
     ax0
@@ -132,7 +200,7 @@ def main(nums):
     ax3.legend(handler1 + handler2, label1 + label2, loc=4, borderaxespad=0.2, fontsize=20)
     fig.savefig('papers/figure_1.png')
     fig.savefig('papers/figure_1.eps')
-    plt.show()
+    #plt.show()
 
 def properties(
         ax, 
