@@ -44,14 +44,8 @@ void Environment::run(
     field.update( iter * DT );
   }
 
-  //std::cout << NUM_CYCLES << std::endl;
-  //std::cout << DT << std::endl;
-  //std::cout << NUM_CYCLES / DT << std::endl;
-  //std::cout << (int)(NUM_CYCLES / DT) << std::endl;
-  //std::cout << MAX_ITER << std::endl;
   for(int iter = 0; iter < MAX_ITER+1; iter++){
     if(iter == MAX_ITER){
-    //if(iter%(int(MAX_ITER/5)) == 0){
       auto [pos, angle] = swimmer.getPose();
       std::cout << std::setprecision(4) << iter << "/" << MAX_ITER;
       std::cout << std::scientific << std::setprecision(5) << " " << pos.x << " " << pos.y << " " << angle << " " << std::endl;

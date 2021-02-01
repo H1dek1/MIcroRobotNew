@@ -25,19 +25,20 @@ def main():
     ax1 = fig.add_subplot(gs[0:2, 1])
     ax3 = fig.add_subplot(gs[2:5, 0])
     ax2 = fig.add_subplot(gs[2:5, 1])
+    ax4 = ax1.twinx()
 
     #ax2_mini = fig.add_axes([0.220, 0.41, 0.3, 0.16])
     #ax3_mini = fig.add_axes([0.695, 0.41, 0.3, 0.16])
 
     ax2_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
-    ax3_mini = fig.add_axes([0.517, 0.16, 0.3, 0.18])
+    ax3_mini = fig.add_axes([0.500, 0.16, 0.3, 0.18])
     """
     ax0
     """
     # visual set
     ratio = 1.0
     ax0.set_xlim([-3.3, 5.0])
-    ax0.set_ylim([-1.0, 2.5])
+    ax0.set_ylim([-1.2, 2.8])
     ax0.set_xlabel(r'$x/\ell$')
     ax0.set_ylabel(r'$y/\ell$')
     ax0.set_aspect('equal')
@@ -110,6 +111,15 @@ def main():
             zorder=4)
     ax0.text(2.0*np.cos(phi/2), 2.0*np.sin(phi/2), r'$\phi^{\rm v}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
 
+    arrow_dictL = dict(arrowstyle = '-', connectionstyle='arc3, rad=-0.25', color='k', linestyle='--', shrinkA=0, shrinkB=0)
+    ax0.annotate('',
+            xy=(center[0], center[1]),
+            xytext=(0, 0),
+            arrowprops=arrow_dictL,
+            color='k',
+            zorder=4)
+    ax0.text(center[0]/2+0.8*np.cos(phi+np.pi/2), center[1]/2+0.8*np.sin(phi+np.pi/2), r'$L/\ell$', fontsize=20, horizontalalignment='center', verticalalignment='center')
+    
 
     center = np.array([0, 0])
     direct = 0
@@ -139,7 +149,6 @@ def main():
     ax0.plot([pos_2[0], pos_3[0]], [pos_2[1], pos_3[1]], 'k-', lw=3, zorder=0)
     ax0.plot([pos_3[0], pos_1[0]], [pos_3[1], pos_1[1]], 'k-', lw=3, zorder=0)
     
-    
 
 
     """
@@ -150,17 +159,32 @@ def main():
     ax1.set_xlabel(r'$t^*$')
     ax1.set_ylabel(r'$\phi^{\rm head}$')
     ax1.set_xlim(0, 10)
-    ax1.set_ylim(-0.1, 1*np.pi/4)
+    ax1.set_ylim(0, 1*np.pi/4)
     xticks = np.arange(0, 11.0, 2.0)
     xticklabels = [str(n) for n in xticks]
     ax1.set_xticks(xticks)
     ax1.set_xticklabels(xticklabels)
+    ax1.tick_params(axis='x', which='major', pad=15)
     ax1.set_yticks([0, np.pi/8, np.pi/6, np.pi/4])
     ax1.set_yticklabels([r'$0$', r'$\pi/8$', r'$\phi^{\rm ext}$', r'$\pi/4$'])
     ax1.plot(theta[:, 0], angle[:, 4], color="red", label=r'$\theta$')
     ax1.hlines(np.pi/6, -1, 13, colors='k', ls='--')
+    """
+    ax4
+    """
+    result = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
+    center_x = result[:,2]
+    center_y = result[:,3]
+    distance = center_x**2 + center_y**2
+    ax4.set_ylabel(r'$L/\ell$')
+    ax4.set_ylim(0, 2.5)
+    ax4.plot(theta[:,0], distance, color='blue', label=r'$L$')
 
 
+
+    """
+    ax2, ax3
+    """
     for ax in [ax2, ax3]:
         ax.set_xlabel(r'$\phi^{\rm ext}$', fontsize=20)
         ax.set_ylabel(r'$\phi^{\rm v}$', fontsize=20)

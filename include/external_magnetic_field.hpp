@@ -18,6 +18,8 @@ class ExternalMagneticField{
 
   public:
     void update(double time);
+    void zeroVector();
+    void XVector();
     Vector2D moment() const;
 };
 

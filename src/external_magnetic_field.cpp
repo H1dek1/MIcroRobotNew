@@ -27,6 +27,16 @@ void ExternalMagneticField::update(double time)
   m_moment.setPolar(norm, angle+(M_PI/2));
 }
 
+void ExternalMagneticField::zeroVector()
+{
+  m_moment.setPolar(0, 0);
+}
+
+void ExternalMagneticField::XVector()
+{
+  m_moment.setPolar(1, angle+(M_PI/2));
+}
+
 ExternalMagneticField::~ExternalMagneticField()
 {
 }
