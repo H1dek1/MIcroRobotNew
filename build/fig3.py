@@ -23,6 +23,7 @@ def main():
     gs = fig.add_gridspec(5, 2)
     ax0 = fig.add_subplot(gs[0:2, 0])
     ax1 = fig.add_subplot(gs[0:2, 1])
+    #ax1 = fig.add_subplot(gs[:, :])
     ax3 = fig.add_subplot(gs[2:5, 0])
     ax2 = fig.add_subplot(gs[2:5, 1])
     ax4 = ax1.twinx()
@@ -154,16 +155,19 @@ def main():
     """
     ax1
     """
-    theta = np.loadtxt('../phases/fig3_theta1out.txt')
-    angle = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
+    #theta = np.loadtxt('../phases/fig3_theta1out.txt')
+    #angle = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
+    theta = np.loadtxt('../result/theta1out.txt')
+    angle = np.loadtxt('../result/result.txt', skiprows=2)
+
     ax1.set_xlabel(r'$t^*$')
     ax1.set_ylabel(r'$\phi^{\rm head}$')
-    ax1.set_xlim(0, 10)
+    ax1.set_xlim(0, 200)
     ax1.set_ylim(0, 1*np.pi/4)
     xticks = np.arange(0, 11.0, 2.0)
     xticklabels = [str(n) for n in xticks]
-    ax1.set_xticks(xticks)
-    ax1.set_xticklabels(xticklabels)
+    #ax1.set_xticks(xticks)
+    #ax1.set_xticklabels(xticklabels)
     ax1.tick_params(axis='x', which='major', pad=15)
     ax1.set_yticks([0, np.pi/8, np.pi/6, np.pi/4])
     ax1.set_yticklabels([r'$0$', r'$\pi/8$', r'$\phi^{\rm ext}$', r'$\pi/4$'])
@@ -172,12 +176,13 @@ def main():
     """
     ax4
     """
-    result = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
+    #result = np.loadtxt('../phases/fig3_result.txt', skiprows=2)
+    result = np.loadtxt('../result/result.txt', skiprows=2)
     center_x = result[:,2]
     center_y = result[:,3]
     distance = center_x**2 + center_y**2
     ax4.set_ylabel(r'$L/\ell$')
-    ax4.set_ylim(0, 2.5)
+    ax4.set_ylim(0, 1500)
     ax4.plot(theta[:,0], distance, color='blue', label=r'$L$')
 
 

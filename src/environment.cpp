@@ -45,6 +45,7 @@ void Environment::run(
   }
 
   for(int iter = 0; iter < MAX_ITER+1; iter++){
+    if(iter%(OUT_ITER*10) == 0) std::cout << iter/1000 << " / " << MAX_ITER/1000 << std::endl;
     if(iter == MAX_ITER){
       auto [pos, angle] = swimmer.getPose();
       std::cout << std::setprecision(4) << iter << "/" << MAX_ITER;
