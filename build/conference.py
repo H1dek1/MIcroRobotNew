@@ -26,8 +26,8 @@ def main(start):
     #x2 = np.linspace(-4*np.pi, 4*np.pi, N)
     #X1, X2 = np.meshgrid(x1, x2)
 
-    #data = np.loadtxt("../result/result.txt", skiprows=2)
-    data = np.loadtxt("../phases/fig3_result.txt", skiprows=2)
+    data = np.loadtxt("../result/result.txt", skiprows=2)
+    #data = np.loadtxt("../phases/fig3_result.txt", skiprows=2)
 
     DT = 0.01
     AbyL = 0.3
