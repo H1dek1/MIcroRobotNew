@@ -39,10 +39,10 @@ void Environment::run(
   for(int iter = 0; iter < SLEEP_ITER; iter++){
     swimmer.update( field.moment(), true);
   }
-  for(int iter = 0; iter < SLEEP_ITER; iter++){
-    swimmer.update( field.moment(), true);
-    field.update( iter * DT );
-  }
+  //for(int iter = 0; iter < SLEEP_ITER; iter++){
+  //  swimmer.update( field.moment(), true);
+  //  field.update( iter * DT );
+  //}
 
   for(int iter = 0; iter < MAX_ITER+1; iter++){
     if(iter%(OUT_ITER*10) == 0) std::cout << iter/1000 << " / " << MAX_ITER/1000 << std::endl;

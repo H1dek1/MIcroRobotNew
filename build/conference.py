@@ -15,9 +15,9 @@ plt.rcParams['ytick.direction'] = 'in'
 plt.rcParams['font.size'] = 20
 
 min_X = -2
-max_X =  1.5
-min_Y = -2
-max_Y =  2
+max_X =  2.5
+min_Y = -1.5
+max_Y =  1.5
 ALPHA = 1.0e+2
 
 def main(start):
@@ -67,7 +67,7 @@ def main(start):
     theta1_rel =   theta_1 - center_angle - np.pi/2
     theta2_rel = -(theta_2 - center_angle - np.pi/2)
     
-    fig = plt.figure(figsize=(7.0, 7), tight_layout=False)
+    fig = plt.figure(figsize=(7.0, 5), tight_layout=True)
     ax1 = fig.add_subplot(1, 1, 1)
 
 #    def ext_potential_surface(theta1, theta2, field_x, field_y):
@@ -111,8 +111,8 @@ def main(start):
         X1, X2 = np.meshgrid(x1, x2)
 
         matplotlibSetting(ax1)
-        ax1.quiver(-1.2, 0.0, ext_x[0], ext_y[0], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.5, 0.3, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.quiver(-1.2, -1.0, ext_x[0], ext_y[0], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
+        ax1.text(-1.5, -0.7, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[0], perm1_y[0]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)
@@ -122,7 +122,7 @@ def main(start):
         ax1.add_patch(perm2)
         ax1.quiver(perm2_x[0], perm2_y[0], perm2_u[0], perm2_v[0], color='black', angles='xy', scale_units='xy', scale=1.2, pivot='mid', width=1.0e-2, zorder=3)
 
-        para = patches.Circle(xy=(para_x[0], para_y[0]), radius=AbyL, fc='orange', ec='orange', fill=True, zorder=2)
+        para = patches.Circle(xy=(para_x[0], para_y[0]), radius=AbyL/2, fc='orange', ec='orange', fill=True, zorder=2)
         ax1.add_patch(para)
         ax1.quiver(para_x[0], para_y[0], para_u[0], para_v[0], color='black', angles='xy', scale_units='xy', scale=1.2, pivot='mid', width=1.0e-2, zorder=3)
         ax1.plot([perm1_x[0], perm2_x[0]], [perm1_y[0], perm2_y[0]], '-', color='k', lw=4, zorder=1)
@@ -154,8 +154,8 @@ def main(start):
             ax1.cla()
 
         matplotlibSetting(ax1)
-        ax1.quiver(-1.2, 0.0, ext_x[i], ext_y[i], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.5, 0.3, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.quiver(-1.2, -1.0, ext_x[i], ext_y[i], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
+        ax1.text(-1.5, -0.7, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[i], perm1_y[i]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)
@@ -165,7 +165,7 @@ def main(start):
         ax1.add_patch(perm2)
         ax1.quiver(perm2_x[i], perm2_y[i], perm2_u[i], perm2_v[i], color='black', angles='xy', scale_units='xy', scale=1.2, pivot='mid', width=1.0e-2, zorder=3)
 
-        para = patches.Circle(xy=(para_x[i], para_y[i]), radius=AbyL, fc='orange', ec='orange', fill=True, zorder=2)
+        para = patches.Circle(xy=(para_x[i], para_y[i]), radius=AbyL/2, fc='orange', ec='orange', fill=True, zorder=2)
         ax1.add_patch(para)
         ax1.quiver(para_x[i], para_y[i], para_u[i], para_v[i], color='black', angles='xy', scale_units='xy', scale=1.2, pivot='mid', width=1.0e-2, zorder=3)
         ax1.plot([perm1_x[i], perm2_x[i]], [perm1_y[i], perm2_y[i]], '-', color='k', lw=4, zorder=1)
@@ -186,6 +186,7 @@ def matplotlibSetting(ax):
     ax.set_ylabel('$y/l$', fontsize=20)
     ax.set_xlim(min_X, max_X)
     ax.set_ylim(min_Y, max_Y)
+    ax.set_yticks([-1, 0, 1])
     ax.set_aspect('equal')
 
 def matplotlibSetting3D(ax):
