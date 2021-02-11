@@ -31,8 +31,8 @@ def main():
     #ax2_mini = fig.add_axes([0.220, 0.41, 0.3, 0.16])
     #ax3_mini = fig.add_axes([0.695, 0.41, 0.3, 0.16])
 
-    ax2_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
-    ax3_mini = fig.add_axes([0.500, 0.16, 0.3, 0.18])
+    ax2_mini = fig.add_axes([0.500, 0.16, 0.3, 0.18])
+    ax3_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
     """
     ax0
     """
@@ -163,7 +163,7 @@ def main():
     ax1.set_xlabel(r'$t^*$')
     ax1.set_ylabel(r'$\phi^{\rm head}$')
     ax1.set_xlim(0, 10)
-    ax1.set_ylim(0, 1*np.pi/4)
+    ax1.set_ylim(-np.pi/80, 1*np.pi/4)
     xticks = np.arange(0, 11.0, 2.0)
     xticklabels = [str(n) for n in xticks]
     ax1.set_xticks(xticks)
@@ -171,7 +171,7 @@ def main():
     ax1.tick_params(axis='x', which='major', pad=15)
     ax1.set_yticks([0, np.pi/8, np.pi/6, np.pi/4])
     ax1.set_yticklabels([r'$0$', r'$\pi/8$', r'$\phi^{\rm ext}$', r'$\pi/4$'])
-    ax1.plot(theta[:, 0], angle[:, 4], color="red", label=r'$\theta$')
+    ax1.plot(theta[:, 0], angle[:, 4], color="red", label=r'$\phi^{\rm head}$')
     ax1.hlines(np.pi/6, -1, 13, colors='k', ls='--')
     """
     ax4
@@ -182,7 +182,7 @@ def main():
     center_y = result[:,3]
     distance = np.sqrt(center_x**2 + center_y**2)
     ax4.set_ylabel(r'$L/\ell$')
-    ax4.set_ylim(0, 2)
+    ax4.set_ylim(-0.1, 2)
     ax4.plot(theta[:,0], distance, color='blue', label=r'$L/\ell$')
     handler1, label1 = ax1.get_legend_handles_labels()
     handler2, label2 = ax4.get_legend_handles_labels()

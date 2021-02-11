@@ -9,7 +9,7 @@ import matplotlib.animation as animation
 import matplotlib.patches as patches
 
 plt.rcParams['font.family'] = 'Times New Roman'
-plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['mathtext.fontset'] = 'cm'
 plt.rcParams['xtick.direction'] = 'in'
 plt.rcParams['ytick.direction'] = 'in'
 plt.rcParams['font.size'] = 20
@@ -112,7 +112,7 @@ def main(start):
 
         matplotlibSetting(ax1)
         ax1.quiver(-1.2, -1.0, ext_x[0], ext_y[0], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.5, -0.7, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.text(-1.5, -0.7, r'$B^{\rm ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[0], perm1_y[0]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)
@@ -155,7 +155,7 @@ def main(start):
 
         matplotlibSetting(ax1)
         ax1.quiver(-1.2, -1.0, ext_x[i], ext_y[i], color='black', angles='xy', scale_units='xy', pivot='mid', scale=2, width=1.0e-2)
-        ax1.text(-1.5, -0.7, r'$B^{ext}$', horizontalalignment='right', verticalalignment='center')
+        ax1.text(-1.5, -0.7, r'$B^{\rm ext}$', horizontalalignment='right', verticalalignment='center')
 
         perm1 = patches.Circle(xy=(perm1_x[i], perm1_y[i]), radius=AbyL, fc='gray', ec='gray', fill=True, zorder=2)
         ax1.add_patch(perm1)
@@ -182,8 +182,8 @@ def main(start):
     ani.save('../aaa.mp4', writer='ffmpeg')
 
 def matplotlibSetting(ax):
-    ax.set_xlabel('$x/l$', fontsize=20)
-    ax.set_ylabel('$y/l$', fontsize=20)
+    ax.set_xlabel('$x/\ell$', fontsize=20)
+    ax.set_ylabel('$y/\ell$', fontsize=20)
     ax.set_xlim(min_X, max_X)
     ax.set_ylim(min_Y, max_Y)
     ax.set_yticks([-1, 0, 1])

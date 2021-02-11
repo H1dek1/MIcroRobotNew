@@ -316,6 +316,7 @@ axes[1].set_xticks([0.01, 0.1, 1, 10, 100, 1000])
 axes[1].set_xticklabels([r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$', r'$10^{2}$', r'$10^{3}$'], fontsize=20)
 axes[1].set_yticks([1e-3, 1e-2, 1e-1, 1, 10])
 axes[1].set_yticklabels([r'$10^{-3}$', r'$10^{-2}$', r'$10^{-1}$', r'$10^{0}$', r'$10^{1}$'], fontsize=20)
+axes[1].set_ylim(4e-2, 13)
 
 cm = parula_map
 
