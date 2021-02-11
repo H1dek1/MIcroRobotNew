@@ -122,9 +122,9 @@ ax0.text(ext_x+1.2*np.cos(np.pi/12), ext_y+1.2*np.sin(np.pi/12), r'$\phi^{\rm ex
 #ax0.text(pos_1[0]+0.9*np.cos(theta_1-np.pi/8), pos_1[1]+0.9*np.sin(theta_1-np.pi/8), r'$\theta_1$', fontsize=20, horizontalalignment='center', verticalalignment='center')
 #ax0.text(pos_2[0]+0.9*np.cos(theta_2+np.pi/6), pos_2[1]+0.9*np.sin(theta_2+np.pi/6), r'$\theta_2$', fontsize=20, horizontalalignment='center', verticalalignment='center')
 ax0.text(center[0]+1.9*np.cos(direct/2), center[1]+1.9*np.sin(direct/2), r'$\phi^{\rm head}$', fontsize=20, horizontalalignment='center', verticalalignment='center')
-ax0.text(0, 2.1, r'left permanent magnetic particle',               fontsize=15, horizontalalignment='left', verticalalignment='center')
+ax0.text(0, 2.1, r'left hard ferromagnetic particle',               fontsize=15, horizontalalignment='left', verticalalignment='center')
 ax0.text(0, 2.1-0.3, r'$\left(\cos\theta_1, \sin\theta_1 \right)$', fontsize=15, horizontalalignment='left', verticalalignment='center')
-ax0.text(1.05, 0, r'right permanent magnetic particle',              fontsize=15, horizontalalignment='left', verticalalignment='center')
+ax0.text(1.05, 0, r'right hard ferromagnetic particle',              fontsize=15, horizontalalignment='left', verticalalignment='center')
 ax0.text(1.05, 0-0.3, r'$\left(\cos\theta_2, \sin\theta_2 \right)$', fontsize=15, horizontalalignment='left', verticalalignment='center')
 
 
