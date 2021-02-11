@@ -24,15 +24,15 @@ def main():
     ax0 = fig.add_subplot(gs[0:2, 0])
     ax1 = fig.add_subplot(gs[0:2, 1])
     #ax1 = fig.add_subplot(gs[:, :])
-    ax3 = fig.add_subplot(gs[2:5, 0])
-    ax2 = fig.add_subplot(gs[2:5, 1])
+    ax2 = fig.add_subplot(gs[2:5, 0])
+    ax3 = fig.add_subplot(gs[2:5, 1])
     ax4 = ax1.twinx()
 
     #ax2_mini = fig.add_axes([0.220, 0.41, 0.3, 0.16])
     #ax3_mini = fig.add_axes([0.695, 0.41, 0.3, 0.16])
 
-    ax2_mini = fig.add_axes([0.500, 0.16, 0.3, 0.18])
-    ax3_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
+    ax2_mini = fig.add_axes([0.035, 0.16, 0.3, 0.18])
+    ax3_mini = fig.add_axes([0.500, 0.16, 0.3, 0.18])
     """
     ax0
     """
